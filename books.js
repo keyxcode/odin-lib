@@ -13,5 +13,5 @@ Book.prototype.info = function () {
   return `${title} by ${author}, ${pages} pages, ${this.read}`;
 };
 
-let book1 = new Book("doremon", "fujiko", 100, true);
-let book2 = new Book("naruto", "fujiko", 100, false);
+const book1 = new Book("doremon", "fujiko", 100, true);
+const book2 = new Book("naruto", "fujiko", 100, false);
