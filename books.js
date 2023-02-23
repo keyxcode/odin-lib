@@ -1,33 +1,32 @@
-let myLib;
-const bookList = document.querySelector("#book-list");
+const myLib = [];
+const entryTable = document.querySelector("#entry-table");
 
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read ? "read" : "not read yet";
-
-  //   this.info = function () {
-  //     return `${title} by ${author}, ${pages} pages, ${this.read}`;
-  //   };
+  this.read = read ? "done" : "todo";
 }
 
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
-function render(book) {
-  const node = document.createElement("li");
-  node.innerText = book.info();
-  bookList.appendChild(node);
+function renderNewBook(book) {
+  const tr = document.createElement("tr");
+  Object.entries(book).forEach(([key, value]) => {
+    const td = document.createElement("td");
+    td.innerText = value;
+    tr.appendChild(td);
+  });
+  entryTable.appendChild(tr);
 }
 
 function addBookToLib(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLib.push(book);
-  render(book);
+  renderNewBook(book);
 }
 
-const demoBook1 = new Book("Sonata", "Beethoven", 5, true);
-const demoBook2 = new Book("Concerto", "Mozart", 3, false);
-myLib = [demoBook1, demoBook2];
+addBookToLib("Sonata", "Beethoven", 5, true);
+addBookToLib("Concerto", "Mozart", 3, false);
