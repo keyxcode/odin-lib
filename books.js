@@ -1,5 +1,4 @@
-const myLib = [];
-
+let myLib;
 const bookList = document.querySelector("#book-list");
 
 function Book(title, author, pages, read) {
@@ -28,3 +27,7 @@ function addBookToLib(title, author, pages, read) {
   myLib.push(book);
   render(book);
 }
+
+const demoBook1 = new Book("Sonata", "Beethoven", 5, true);
+const demoBook2 = new Book("Concerto", "Mozart", 3, false);
+myLib = [demoBook1, demoBook2];

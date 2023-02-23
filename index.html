@@ -6,9 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer src="books.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <title>Library</title>
   </head>
   <body>
+    <div class="page-container">
+      <div id="page-header">REPERTOIRE TRACKER</div>
+      <div id="dashboard">
+        <div id="total">TOTAL</div>
+        <div id="finished">FINISHED</div>
+        <div id="to-learn">TO LEARN</div>
+        <div id="add">ADD NEW</div>
+      </div>
+    </div>
+    <table id="entry-table">
+      <tr>
+        <th>TITLE</th>
+        <th>COMPOSER</th>
+        <th>PAGES</th>
+        <th>STATUS</th>
+        <th>EDIT</th>
+      </tr>
+    </table>
     <ul id="book-list"></ul>
   </body>
 </html>

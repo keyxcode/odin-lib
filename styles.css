@@ -5,3 +5,48 @@
   --light: #90e0ef;
   --lightest: #caf0f8;
 }
+
+html {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: var(--darkest);
+}
+
+body {
+  background-color: var(--light);
+  height: 100vh;
+}
+
+#page-container {
+  display: flex;
+  justify-content: center;
+}
+
+#page-header {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 75%;
+  background-color: var(--lightest);
+  border-radius: 5px;
+  border: 2px solid var(--darkest);
+  justify-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 50px auto;
+}
+
+#add {
+  grid-column: 1/4;
+}
+
+#entry-table {
+  width: 100%;
+  background-color: var(--lightest);
+  border-radius: 5px;
+  border: 2px solid var(--darkest);
+}
