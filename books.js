@@ -1,20 +1,20 @@
-const myLib = [];
+const myPieces = [];
 const entryTable = document.querySelector("#entry-table");
 
-function Book(title, author, pages, read) {
+function Piece(title, composer, pages, learnt) {
   this.title = title;
-  this.author = author;
+  this.composer = composer;
   this.pages = pages;
-  this.read = read ? "done" : "todo";
+  this.learnt = learnt ? "learnt" : "tolearn";
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+Piece.prototype.info = function () {
+  return `${this.title} by ${this.composer}, ${this.pages} pages, ${this.learnt}`;
 };
 
-function renderNewBook(book) {
+function renderNewPiece(piece) {
   const tr = document.createElement("tr");
-  Object.entries(book).forEach(([key, value]) => {
+  Object.entries(piece).forEach(([key, value]) => {
     const td = document.createElement("td");
     td.innerText = value;
     tr.appendChild(td);
@@ -22,11 +22,11 @@ function renderNewBook(book) {
   entryTable.appendChild(tr);
 }
 
-function addBookToLib(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  myLib.push(book);
-  renderNewBook(book);
+function addPieceToLib(title, composer, pages, learnt) {
+  const newPiece = new Piece(title, composer, pages, learnt);
+  myPieces.push(newPiece);
+  renderNewPiece(newPiece);
 }
 
-addBookToLib("Sonata", "Beethoven", 5, true);
-addBookToLib("Concerto", "Mozart", 3, false);
+addPieceToLib("Sonata", "Beethoven", 5, true);
+addPieceToLib("Concerto", "Mozart", 3, false);
