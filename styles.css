@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  background-color: var(--light);
+  background-color: var(--lightest);
   height: 100vh;
 }
 

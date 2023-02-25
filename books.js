@@ -1,3 +1,19 @@
+const App = (() => {
+  const myPieces = [];
+  const cacheDom = () => {};
+  const render = () => {
+    const entryTable = document.querySelector("#entry-table");
+  };
+  const init = () => {
+    cacheDom();
+    render();
+  };
+
+  return myPieces, cacheDom, render, init;
+})();
+
+App.init();
+
 const myPieces = [];
 const entryTable = document.querySelector("#entry-table");
 
