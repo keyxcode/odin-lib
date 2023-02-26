@@ -16,12 +16,11 @@ const piece2 = Piece("Concerto", "Mozart", 3, false);
 
 const App = (() => {
   const myPieces = [piece1, piece2];
-  const cacheDom = () => {};
-  const bindEvents = () => {};
+  const add = document.querySelector("#add");
+
   const render = () => {
     const tableBody = document.querySelector("#table-body");
     tableBody.replaceChildren(); // without any arg, this removes all children
-
     myPieces.forEach((piece) => {
       const tr = document.createElement("tr");
       Object.entries(piece).forEach(([key, value]) => {
@@ -32,18 +31,22 @@ const App = (() => {
       tableBody.appendChild(tr);
     });
   };
-  const init = () => {
-    cacheDom();
-    bindEvents();
-    render();
-  };
   const addPiece = (title, composer, pages, learnt) => {
     const piece = Piece(title, composer, pages, learnt);
     myPieces.push(piece);
     render();
   };
+  const bindEvents = () => {
+    add.addEventListener("click", () => {
+      addPiece("a", "b", 1, true);
+    });
+  };
+  const init = () => {
+    bindEvents();
+    render();
+  };
 
-  return { myPieces, init, addPiece };
+  return { myPieces, add, init, addPiece };
 })();
 
 App.init();
