@@ -5,18 +5,12 @@ const Piece = (title, composer, pages, learnt) => ({
   learnt,
 });
 
-// function addPieceToLib(title, composer, pages, learnt) {
-//   const newPiece = Piece(title, composer, pages, learnt);
-//   myPieces.push(newPiece);
-//   renderNewPiece(newPiece);
-// }
-
 const piece1 = Piece("Sonata", "Beethoven", 5, true);
 const piece2 = Piece("Concerto", "Mozart", 3, false);
 
 const App = (() => {
   const myPieces = [piece1, piece2];
-  const add = document.querySelector("#add");
+  const addButton = document.querySelector("#add");
 
   const render = () => {
     const tableBody = document.querySelector("#table-body");
@@ -24,10 +18,14 @@ const App = (() => {
     myPieces.forEach((piece) => {
       const tr = document.createElement("tr");
       Object.entries(piece).forEach(([key, value]) => {
+        tr.dataset.id = key;
         const td = document.createElement("td");
         td.innerText = value;
         tr.appendChild(td);
       });
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "Del";
+      tr.appendChild(deleteButton);
       tableBody.appendChild(tr);
     });
   };
@@ -37,7 +35,7 @@ const App = (() => {
     render();
   };
   const bindEvents = () => {
-    add.addEventListener("click", () => {
+    addButton.addEventListener("click", () => {
       addPiece("a", "b", 1, true);
     });
   };
@@ -46,7 +44,7 @@ const App = (() => {
     render();
   };
 
-  return { myPieces, add, init, addPiece };
+  return { myPieces, init, addPiece };
 })();
 
 App.init();
