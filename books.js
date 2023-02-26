@@ -5,26 +5,33 @@ const Piece = (title, composer, pages, learnt) => ({
   learnt,
 });
 
+// Demo pieces
 const piece1 = Piece("Sonata", "Beethoven", 5, true);
 const piece2 = Piece("Concerto", "Mozart", 3, false);
 
 const App = (() => {
   const myPieces = [piece1, piece2];
+
+  // cache DOM
   const addButton = document.querySelector("#add");
+  const tableBody = document.querySelector("#table-body");
 
   const render = () => {
-    const tableBody = document.querySelector("#table-body");
-    tableBody.replaceChildren(); // without any arg, this removes all children
+    // without any arg, replaceChildren() removes all children
+    tableBody.replaceChildren();
+    let index = 0;
     myPieces.forEach((piece) => {
       const tr = document.createElement("tr");
+      tr.dataset.id = index;
+      index += 1;
       Object.entries(piece).forEach(([key, value]) => {
-        tr.dataset.id = key;
         const td = document.createElement("td");
         td.innerText = value;
         tr.appendChild(td);
       });
       const deleteButton = document.createElement("button");
       deleteButton.innerText = "Del";
+      deleteButton.classList.add("del");
       tr.appendChild(deleteButton);
       tableBody.appendChild(tr);
     });
@@ -34,17 +41,22 @@ const App = (() => {
     myPieces.push(piece);
     render();
   };
-  const bindEvents = () => {
-    addButton.addEventListener("click", () => {
-      addPiece("a", "b", 1, true);
-    });
-  };
-  const init = () => {
-    bindEvents();
+  const deletePiece = (id) => {
+    myPieces.splice(id, 1);
     render();
   };
 
-  return { myPieces, init, addPiece };
-})();
+  render();
 
-App.init();
+  // bind Events
+  addButton.addEventListener("click", () => {
+    addPiece("a", "b", 1, true);
+  });
+  tableBody.addEventListener("click", (e) => {
+    if (e.target.classList.contains("del")) {
+      deletePiece(e.target.parentNode.dataset.id);
+    }
+  });
+
+  return { myPieces, addPiece, deletePiece };
+})();
