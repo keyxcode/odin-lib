@@ -19,7 +19,8 @@ const App = (() => {
   const cacheDom = () => {};
   const bindEvents = () => {};
   const render = () => {
-    const entryTable = document.querySelector("#entry-table");
+    const tableBody = document.querySelector("#table-body");
+    tableBody.replaceChildren(); // without any arg, this removes all children
 
     myPieces.forEach((piece) => {
       const tr = document.createElement("tr");
@@ -28,7 +29,7 @@ const App = (() => {
         td.innerText = value;
         tr.appendChild(td);
       });
-      entryTable.appendChild(tr);
+      tableBody.appendChild(tr);
     });
   };
   const init = () => {
@@ -36,8 +37,13 @@ const App = (() => {
     bindEvents();
     render();
   };
+  const addPiece = (title, composer, pages, learnt) => {
+    const piece = Piece(title, composer, pages, learnt);
+    myPieces.push(piece);
+    render();
+  };
 
-  return { myPieces, cacheDom, render, init };
+  return { myPieces, init, addPiece };
 })();
 
 App.init();

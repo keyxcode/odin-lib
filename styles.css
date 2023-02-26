@@ -44,7 +44,7 @@ body {
   grid-column: 1/4;
 }
 
-#entry-table {
+table {
   width: 100%;
   background-color: var(--lightest);
   border-radius: 5px;
