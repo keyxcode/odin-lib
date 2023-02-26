@@ -6,7 +6,8 @@
   --lightest: #caf0f8;
 }
 
-button {
+button,
+#submit {
   background-color: var(--button);
   color: var(--darkest);
   border: 1px solid var(--darkest);
@@ -15,7 +16,8 @@ button {
   transition-duration: 0.3s;
 }
 
-button:hover {
+button:hover,
+#submit:hover {
   background-color: var(--light);
 }
 
@@ -38,6 +40,7 @@ body {
 #page-header {
   text-align: center;
   margin-top: 50px;
+  font-size: 30px;
 }
 
 #dashboard {
@@ -63,4 +66,27 @@ table {
   border-radius: 5px;
   border: 2px solid var(--darkest);
   text-align: center;
+  margin-bottom: 50px;
+}
+
+#form-container {
+  display: flex;
+  justify-content: center;
+}
+
+#piece-form {
+  width: 50%;
+  display: grid;
+  border: 2px solid var(--darkest);
+  padding: 5px;
+  justify-content: center;
+  gap: 5px;
+}
+
+form > div {
+  display: grid;
+}
+
+#checkbox-container {
+  display: block;
 }

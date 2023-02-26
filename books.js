@@ -15,6 +15,11 @@ const App = (() => {
   // cache DOM
   const addButton = document.querySelector("#add");
   const tableBody = document.querySelector("#table-body");
+  const pieceForm = document.querySelector("#piece-form");
+  const formTitle = document.querySelector("#title");
+  const formComposer = document.querySelector("#composer");
+  const formPages = document.querySelector("#pages");
+  const formLearnt = document.querySelector("#learnt");
 
   const render = () => {
     // without any arg, replaceChildren() removes all children
@@ -45,17 +50,33 @@ const App = (() => {
     myPieces.splice(id, 1);
     render();
   };
-
+  const showForm = () => {};
+  const clearForm = () => {
+    formTitle.value = "";
+    formComposer.value = "";
+    formPages.value = "";
+    formLearnt.value = false;
+  };
   render();
 
   // bind Events
   addButton.addEventListener("click", () => {
-    addPiece("a", "b", 1, true);
+    showForm();
   });
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("del")) {
       deletePiece(e.target.parentNode.dataset.id);
     }
+  });
+
+  pieceForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = formTitle.value;
+    const composer = formComposer.value;
+    const pages = formPages.value;
+    const learnt = formLearnt.checked;
+    addPiece(title, composer, pages, learnt);
+    clearForm();
   });
 
   return { myPieces, addPiece, deletePiece };
