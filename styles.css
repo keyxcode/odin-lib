@@ -1,16 +1,36 @@
 :root {
-  --darkest: #03045e;
-  --dark: #0077b6;
-  --button: #00b4d8;
-  --light: #90e0ef;
-  --lightest: #caf0f8;
+  --darkest: #331832;
+  --dark: #d81e5b;
+  --mid: #f0544f;
+  --light: #c6d8d3;
+  --lightest: #fdf0d5;
+
+  /* --darkest: #002e2c;
+  --dark: #035e7b;
+  --mid: #a2a77f;
+  --light: #e3e7af;
+  --lightest: #eff1c5; */
+
+  /* --darkest: #481d24;
+  --dark: #255f85;
+  --mid: #c5283d;
+  --light: #e9724c;
+  --lightest: #ffc857; */
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: var(--darkest);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 button,
 #submit {
-  background-color: var(--button);
-  color: var(--darkest);
-  border: 1px solid var(--darkest);
+  background-color: var(--dark);
+  border: 1px solid var(--dark);
+  color: var(--lightest);
   border-radius: 5px;
   padding: 5px 10px;
   transition-duration: 0.3s;
@@ -18,29 +38,29 @@ button,
 
 button:hover,
 #submit:hover {
-  background-color: var(--light);
-}
-
-html {
-  box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  background-color: var(--mid);
+  border: 1px solid var(--mid);
   color: var(--darkest);
 }
 
 body {
-  background-color: var(--lightest);
+  background-color: var(--darkest);
   height: 100vh;
   margin: 0;
 }
 
-#page-container {
+.page-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-#page-header {
+header {
   text-align: center;
   font-size: 30px;
+  background-color: var(--lightest);
+  padding: 20px;
+  width: 100%;
 }
 
 #dashboard {
@@ -61,7 +81,7 @@ body {
 }
 
 table {
-  width: 100%;
+  width: max(50%, 200px);
   background-color: var(--lightest);
   border-radius: 5px;
   border: 2px solid var(--darkest);
@@ -83,14 +103,16 @@ table {
 
 #piece-form {
   width: max(25%, 200px);
+  transform: translateY(-50%);
   flex-grow: 0;
   display: grid;
+  background-color: var(--lightest);
   border: 2px solid var(--darkest);
+  color: var(--darkest);
   border-radius: 5px;
-  padding: 10px;
+  padding: 50px 10px;
   justify-content: center;
-  gap: 5px;
-  background-color: var(--dark);
+  gap: 10px;
 }
 
 form > div {
