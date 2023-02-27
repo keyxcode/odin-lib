@@ -15,6 +15,7 @@ const App = (() => {
   // cache DOM
   const addButton = document.querySelector("#add");
   const tableBody = document.querySelector("#table-body");
+  const formContainer = document.querySelector("#form-container");
   const pieceForm = document.querySelector("#piece-form");
   const formTitle = document.querySelector("#title");
   const formComposer = document.querySelector("#composer");
@@ -50,7 +51,12 @@ const App = (() => {
     myPieces.splice(id, 1);
     render();
   };
-  const showForm = () => {};
+  const showForm = () => {
+    formContainer.style.display = "flex";
+  };
+  const hideForm = () => {
+    formContainer.style.display = "none";
+  };
   const clearForm = () => {
     formTitle.value = "";
     formComposer.value = "";
@@ -68,7 +74,6 @@ const App = (() => {
       deletePiece(e.target.parentNode.dataset.id);
     }
   });
-
   pieceForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = formTitle.value;
@@ -77,6 +82,12 @@ const App = (() => {
     const learnt = formLearnt.checked;
     addPiece(title, composer, pages, learnt);
     clearForm();
+    hideForm();
+  });
+  window.addEventListener("click", (e) => {
+    if (e.target === formContainer) {
+      hideForm();
+    }
   });
 
   return { myPieces, addPiece, deletePiece };
