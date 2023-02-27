@@ -4,12 +4,19 @@ const Stats = (() => {
   const finished = document.querySelector("#finished");
   const toLearn = document.querySelector("#to-learn");
 
-  const updateStats = () => {
-    total.innerText = "hi";
-    finished.innerText = "hi";
-    toLearn.innerText = "hi";
+  const parsePiecesStats = (pieces) => {
+    const numTotal = pieces.length;
+    const numFinished = 1;
+    const numToLearn = numTotal - numFinished;
+    return { numTotal, numFinished, numToLearn };
   };
-  // bind Events
+
+  const updateStats = (pieces) => {
+    const stats = parsePiecesStats(pieces);
+    total.innerText = stats.numTotal;
+    finished.innerText = stats.numFinished;
+    toLearn.innerText = stats.numToLearn;
+  };
 
   return { updateStats };
 })();
@@ -59,6 +66,8 @@ const App = (() => {
       delCell.innerHTML = `<button class="del">Del</button>`;
 
       tableBody.appendChild(tr);
+
+      Stats.updateStats(myPieces);
     });
   };
   const addOrEditPiece = (title, composer, pages, learnt, id) => {
@@ -69,7 +78,6 @@ const App = (() => {
       myPieces.push(piece);
     }
     render();
-    Stats.updateStats();
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
