@@ -26,8 +26,9 @@ const App = (() => {
     // without any arg, replaceChildren() removes all children
     tableBody.replaceChildren();
     let index = 0;
+
     myPieces.forEach((piece) => {
-      const tr = document.createElement("tr");
+      const tr = tableBody.insertRow();
       tr.dataset.id = index;
       index += 1;
       Object.entries(piece).forEach(([key, value]) => {
@@ -35,10 +36,12 @@ const App = (() => {
         td.innerText = value;
         tr.appendChild(td);
       });
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "Del";
-      deleteButton.classList.add("del");
-      tr.appendChild(deleteButton);
+
+      const cell4 = tr.insertCell(4);
+      cell4.innerHTML = `<button class="edit">Edit</button>`;
+      const cell5 = tr.insertCell(5);
+      cell5.innerHTML = `<button class="del">Del</button>`;
+
       tableBody.appendChild(tr);
     });
   };
@@ -63,6 +66,9 @@ const App = (() => {
     formPages.value = "";
     formLearnt.value = false;
   };
+  const editPiece = (id) => {
+    showForm();
+  };
   render();
 
   // bind Events
@@ -72,6 +78,8 @@ const App = (() => {
   tableBody.addEventListener("click", (e) => {
     if (e.target.classList.contains("del")) {
       deletePiece(e.target.parentNode.dataset.id);
+    } else if (e.target.classList.contains("edit")) {
+      editPiece(e.target.parentNode.dataset.id);
     }
   });
   pieceForm.addEventListener("submit", (e) => {

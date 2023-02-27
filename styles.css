@@ -4,18 +4,6 @@
   --mid: #f0544f;
   --light: #c6d8d3;
   --lightest: #fdf0d5;
-
-  /* --darkest: #002e2c;
-  --dark: #035e7b;
-  --mid: #a2a77f;
-  --light: #e3e7af;
-  --lightest: #eff1c5; */
-
-  /* --darkest: #481d24;
-  --dark: #255f85;
-  --mid: #c5283d;
-  --light: #e9724c;
-  --lightest: #ffc857; */
 }
 
 html {
@@ -127,8 +115,4 @@ table {
 
 form > div {
   display: grid;
-}
-
-#checkbox-container {
-  display: block;
 }
