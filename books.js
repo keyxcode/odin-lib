@@ -32,15 +32,14 @@ const App = (() => {
       tr.dataset.id = index;
       index += 1;
       Object.entries(piece).forEach(([key, value]) => {
-        const td = document.createElement("td");
-        td.innerText = value;
-        tr.appendChild(td);
+        const cell = tr.insertCell();
+        cell.innerHTML = value;
       });
 
-      const cell4 = tr.insertCell(4);
-      cell4.innerHTML = `<button class="edit">Edit</button>`;
-      const cell5 = tr.insertCell(5);
-      cell5.innerHTML = `<button class="del">Del</button>`;
+      const editCell = tr.insertCell();
+      editCell.innerHTML = `<button class="edit">Edit</button>`;
+      const delCell = tr.insertCell();
+      delCell.innerHTML = `<button class="del">Del</button>`;
 
       tableBody.appendChild(tr);
     });
@@ -54,8 +53,15 @@ const App = (() => {
     myPieces.splice(id, 1);
     render();
   };
-  const showForm = () => {
+  const showForm = (id) => {
     formContainer.style.display = "flex";
+    if (id) {
+      const pieceToEdit = myPieces[id];
+      formTitle.value = pieceToEdit.title;
+      formComposer.value = pieceToEdit.composer;
+      formPages.value = pieceToEdit.pages;
+      formLearnt.checked = pieceToEdit.learnt;
+    }
   };
   const hideForm = () => {
     formContainer.style.display = "none";
@@ -67,7 +73,7 @@ const App = (() => {
     formLearnt.value = false;
   };
   const editPiece = (id) => {
-    showForm();
+    showForm(id);
   };
   render();
 
@@ -76,10 +82,11 @@ const App = (() => {
     showForm();
   });
   tableBody.addEventListener("click", (e) => {
+    const pieceID = e.target.parentNode.parentNode.dataset.id;
     if (e.target.classList.contains("del")) {
-      deletePiece(e.target.parentNode.dataset.id);
+      deletePiece(pieceID);
     } else if (e.target.classList.contains("edit")) {
-      editPiece(e.target.parentNode.dataset.id);
+      editPiece(pieceID);
     }
   });
   pieceForm.addEventListener("submit", (e) => {
