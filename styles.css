@@ -30,6 +30,7 @@ html {
 body {
   background-color: var(--lightest);
   height: 100vh;
+  margin: 0;
 }
 
 #page-container {
@@ -46,7 +47,7 @@ body {
 #dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 75%;
+  width: max(25%, 200px);
   background-color: var(--lightest);
   border-radius: 5px;
   border: 2px solid var(--darkest);
@@ -67,20 +68,30 @@ table {
   border: 2px solid var(--darkest);
   text-align: center;
   margin-bottom: 50px;
+  padding: 10px;
 }
 
 #form-container {
-  display: flex;
+  display: none;
+  width: 100%;
+  height: 100%;
   justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1;
 }
 
 #piece-form {
-  width: 50%;
+  width: max(25%, 200px);
+  flex-grow: 0;
   display: grid;
   border: 2px solid var(--darkest);
-  padding: 5px;
+  border-radius: 5px;
+  padding: 10px;
   justify-content: center;
   gap: 5px;
+  background-color: var(--dark);
 }
 
 form > div {
