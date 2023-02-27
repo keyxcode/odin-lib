@@ -21,6 +21,7 @@ const App = (() => {
   const formComposer = document.querySelector("#composer");
   const formPages = document.querySelector("#pages");
   const formLearnt = document.querySelector("#learnt");
+  const formID = document.querySelector("#form-id");
 
   const render = () => {
     // without any arg, replaceChildren() removes all children
@@ -44,9 +45,13 @@ const App = (() => {
       tableBody.appendChild(tr);
     });
   };
-  const addPiece = (title, composer, pages, learnt) => {
+  const addOrEditPiece = (title, composer, pages, learnt, id) => {
     const piece = Piece(title, composer, pages, learnt);
-    myPieces.push(piece);
+    if (id) {
+      myPieces[id] = piece;
+    } else {
+      myPieces.push(piece);
+    }
     render();
   };
   const deletePiece = (id) => {
@@ -61,6 +66,7 @@ const App = (() => {
       formComposer.value = pieceToEdit.composer;
       formPages.value = pieceToEdit.pages;
       formLearnt.checked = pieceToEdit.learnt;
+      formID.value = id;
     }
   };
   const hideForm = () => {
@@ -71,6 +77,7 @@ const App = (() => {
     formComposer.value = "";
     formPages.value = "";
     formLearnt.value = false;
+    formID.value = "";
   };
   const editPiece = (id) => {
     showForm(id);
@@ -95,7 +102,8 @@ const App = (() => {
     const composer = formComposer.value;
     const pages = formPages.value;
     const learnt = formLearnt.checked;
-    addPiece(title, composer, pages, learnt);
+    const id = formID.value;
+    addOrEditPiece(title, composer, pages, learnt, id);
     clearForm();
     hideForm();
   });
@@ -105,5 +113,5 @@ const App = (() => {
     }
   });
 
-  return { myPieces, addPiece, deletePiece };
+  return { myPieces, addPiece: addOrEditPiece, deletePiece };
 })();
