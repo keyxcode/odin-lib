@@ -6,7 +6,7 @@ const Stats = (() => {
 
   const parsePiecesStats = (pieces) => {
     const numTotal = pieces.length;
-    const numFinished = 1;
+    const numFinished = pieces.filter((piece) => piece.learnt === true).length;
     const numToLearn = numTotal - numFinished;
     return { numTotal, numFinished, numToLearn };
   };
