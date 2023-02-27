@@ -1,9 +1,35 @@
 :root {
-  --darkest: #331832;
+  --global-radius: 10px;
+
+  /* --darkest: #331832;
   --dark: #d81e5b;
   --mid: #f0544f;
   --light: #c6d8d3;
-  --lightest: #fdf0d5;
+  --lightest: #fdf0d5; */
+
+  /* --darkest: #826251;
+  --dark: #568ea3;
+  --mid: #68c3d4;
+  --light: #ffe8d1;
+  --lightest: #ffffff; */
+
+  /* --darkest: #003249;
+  --dark: #007ea7;
+  --mid: #80ced7;
+  --light: #9ad1d4;
+  --lightest: #ccdbdc; */
+
+  /* --darkest: #6d696a;
+  --dark: #a2a7a5;
+  --mid: #e2dadb;
+  --light: #dae2df;
+  --lightest: #ffffff; */
+
+  --darkest: #2d2d34;
+  --dark: #b97375;
+  --mid: #ceb1be;
+  --light: #e2dcde;
+  --lightest: #f1e4e8;
 }
 
 html {
@@ -19,7 +45,7 @@ button,
   background-color: var(--dark);
   border: 1px solid var(--dark);
   color: var(--lightest);
-  border-radius: 5px;
+  border-radius: var(--global-radius);
   padding: 5px 10px;
   transition-duration: 0.3s;
 }
@@ -66,7 +92,7 @@ footer {
   grid-template-columns: repeat(3, 1fr);
   width: max(25%, 200px);
   background-color: var(--lightest);
-  border-radius: 5px;
+  border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
   justify-items: center;
   gap: 10px;
@@ -81,7 +107,7 @@ footer {
 table {
   width: max(50%, 200px);
   background-color: var(--lightest);
-  border-radius: 5px;
+  border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
   text-align: center;
   margin-bottom: 50px;
@@ -107,7 +133,7 @@ table {
   background-color: var(--lightest);
   border: 2px solid var(--darkest);
   color: var(--darkest);
-  border-radius: 5px;
+  border-radius: var(--global-radius);
   padding: 50px 10px;
   justify-content: center;
   gap: 10px;
@@ -115,4 +141,8 @@ table {
 
 form > div {
   display: grid;
+}
+
+#checkbox-container {
+  display: flex;
 }
