@@ -1,3 +1,19 @@
+const Stats = (() => {
+  // cache DOM
+  const total = document.querySelector("#total");
+  const finished = document.querySelector("#finished");
+  const toLearn = document.querySelector("#to-learn");
+
+  const updateStats = () => {
+    total.innerText = "hi";
+    finished.innerText = "hi";
+    toLearn.innerText = "hi";
+  };
+  // bind Events
+
+  return { updateStats };
+})();
+
 const Piece = (title, composer, pages, learnt) => ({
   title,
   composer,
@@ -53,6 +69,7 @@ const App = (() => {
       myPieces.push(piece);
     }
     render();
+    Stats.updateStats();
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
@@ -113,5 +130,5 @@ const App = (() => {
     }
   });
 
-  return { myPieces, addPiece: addOrEditPiece, deletePiece };
+  return { myPieces, addOrEditPiece, deletePiece };
 })();
