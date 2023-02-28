@@ -1,17 +1,35 @@
 :root {
   --global-radius: 10px;
 
-  /* --darkest: #331832;
-  --dark: #d81e5b;
-  --mid: #f0544f;
-  --light: #c6d8d3;
-  --lightest: #fdf0d5; */
-
-  --darkest: #2d2d34;
+  /* --darkest: #2d2d34;
   --dark: #b97375;
   --mid: #ceb1be;
   --light: #e2dcde;
-  --lightest: #f1e4e8;
+  --lightest: #f1e4e8; */
+
+  /* --darkest: #050505;
+  --dark: #1b9aaa;
+  --mid: #dddbcb;
+  --light: #f5f1e3;
+  --lightest: #ffffff; */
+
+  /* --darkest: #252627;
+  --dark: #904e55;
+  --mid: #564e58;
+  --light: #bfb48f;
+  --lightest: #f2efe9; */
+
+  /* --darkest: #222a3d;
+  --dark: #7a5763;
+  --mid: #23b5e3;
+  --light: #60b3bf;
+  --lightest: #ece4e2; */
+
+  --darkest: #272643;
+  --dark: #2c698d;
+  --mid: #bae8e8;
+  --light: #e3f6f5;
+  --lightest: #ffffff;
 }
 
 html {
@@ -127,4 +145,8 @@ form > div {
 
 #checkbox-container {
   display: flex;
+}
+
+.bold {
+  font-weight: bold;
 }
