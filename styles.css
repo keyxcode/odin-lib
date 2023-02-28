@@ -7,12 +7,6 @@
   --light: #bfb48f;
   --lightest: #f2efe9; */
 
-  /* --darkest: #222a3d;
-  --dark: #7a5763;
-  --mid: #23b5e3;
-  --light: #60b3bf;
-  --lightest: #ece4e2; */
-
   --darkest: #272643;
   --dark: #2c698d;
   --mid: #bae8e8;
@@ -46,7 +40,7 @@ button:hover,
 }
 
 body {
-  background-color: var(--lightest);
+  background-color: var(--light);
   height: 100vh;
   margin: 0;
 }
@@ -76,16 +70,20 @@ footer {
   font-size: 16px;
 }
 
+#dashboard,
+table {
+  background-color: var(--lightest);
+  border-radius: var(--global-radius);
+  border: 2px solid var(--darkest);
+  padding: 10px;
+}
+
 #dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: max(30%, 250px);
-  background-color: var(--light);
-  border-radius: var(--global-radius);
-  border: 2px solid var(--darkest);
   justify-items: center;
   gap: 10px;
-  padding: 10px;
   margin: 50px auto;
 }
 
@@ -95,12 +93,8 @@ footer {
 
 table {
   width: max(50%, 200px);
-  background-color: var(--light);
-  border-radius: var(--global-radius);
-  border: 2px solid var(--darkest);
   text-align: center;
   margin-bottom: 50px;
-  padding: 10px;
 }
 
 #form-container {
