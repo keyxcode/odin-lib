@@ -12,6 +12,7 @@ const Stats = (() => {
   };
 
   const updateStats = (pieces) => {
+    console.log(`hello ${pieces}`);
     const stats = parsePiecesStats(pieces);
     total.innerText = stats.numTotal;
     finished.innerText = stats.numFinished;
@@ -66,9 +67,8 @@ const App = (() => {
       delCell.innerHTML = `<button class="del">Del</button>`;
 
       tableBody.appendChild(tr);
-
-      Stats.updateStats(myPieces);
     });
+    Stats.updateStats(myPieces);
   };
   const addOrEditPiece = (title, composer, pages, learnt, id) => {
     const piece = Piece(title, composer, pages, learnt);
