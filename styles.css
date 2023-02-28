@@ -1,18 +1,6 @@
 :root {
   --global-radius: 10px;
 
-  /* --darkest: #2d2d34;
-  --dark: #b97375;
-  --mid: #ceb1be;
-  --light: #e2dcde;
-  --lightest: #f1e4e8; */
-
-  /* --darkest: #050505;
-  --dark: #1b9aaa;
-  --mid: #dddbcb;
-  --light: #f5f1e3;
-  --lightest: #ffffff; */
-
   /* --darkest: #252627;
   --dark: #904e55;
   --mid: #564e58;
@@ -52,13 +40,13 @@ button,
 
 button:hover,
 #submit:hover {
-  background-color: var(--mid);
-  border: 1px solid var(--mid);
-  color: var(--darkest);
+  background-color: var(--darkest);
+  border: 1px solid var(--darkest);
+  color: var(--lightest);
 }
 
 body {
-  background-color: var(--darkest);
+  background-color: var(--lightest);
   height: 100vh;
   margin: 0;
 }
@@ -74,7 +62,8 @@ header,
 footer {
   text-align: center;
   font-size: 30px;
-  background-color: var(--lightest);
+  background-color: var(--darkest);
+  color: var(--lightest);
   padding: 20px;
   width: 100%;
 }
@@ -90,8 +79,8 @@ footer {
 #dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: max(25%, 200px);
-  background-color: var(--lightest);
+  width: max(30%, 250px);
+  background-color: var(--light);
   border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
   justify-items: center;
@@ -106,7 +95,7 @@ footer {
 
 table {
   width: max(50%, 200px);
-  background-color: var(--lightest);
+  background-color: var(--light);
   border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
   text-align: center;
