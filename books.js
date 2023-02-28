@@ -1,3 +1,29 @@
+const EventManager = (() => {
+  // the events object contains pairs of: event - [list of corresponding callbacks]
+  const events = {};
+
+  const publish = (event, arg) => {
+    if (!events[event]) return;
+
+    events[event].forEach((callBack) => {
+      callBack(arg);
+    });
+  };
+  const subscribe = (event, callBack) => {
+    events[event] = events[event] === undefined ? [] : events[event];
+    events[event].push(callBack);
+  };
+  const unsubscribe = (event, callBack) => {
+    if (!events[event]) return;
+
+    const callBacks = events[event];
+    const callBackID = callBacks.indexOf(callBack);
+    if (callBackID >= 0) callBacks.splice(callBackID, 1);
+  };
+
+  return { publish, subscribe, unsubscribe };
+})();
+
 const Stats = (() => {
   // cache DOM
   const total = document.querySelector("#total");
@@ -11,15 +37,14 @@ const Stats = (() => {
     return { numTotal, numFinished, numToLearn };
   };
 
-  const updateStats = (pieces) => {
-    console.log(`hello ${pieces}`);
+  const renderStats = (pieces) => {
     const stats = parsePiecesStats(pieces);
     total.innerText = stats.numTotal;
     finished.innerText = stats.numFinished;
     toLearn.innerText = stats.numToLearn;
   };
 
-  return { updateStats };
+  return { renderStats };
 })();
 
 const Piece = (title, composer, pages, learnt) => ({
@@ -68,7 +93,7 @@ const App = (() => {
 
       tableBody.appendChild(tr);
     });
-    Stats.updateStats(myPieces);
+    Stats.renderStats(myPieces);
   };
   const addOrEditPiece = (title, composer, pages, learnt, id) => {
     const piece = Piece(title, composer, pages, learnt);
