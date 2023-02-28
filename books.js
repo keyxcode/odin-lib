@@ -44,7 +44,9 @@ const Stats = (() => {
     toLearn.innerText = stats.numToLearn;
   };
 
-  return { renderStats };
+  EventManager.subscribe("piecesChanged", (pieces) => {
+    renderStats(pieces);
+  });
 })();
 
 const Piece = (title, composer, pages, learnt) => ({
@@ -93,7 +95,6 @@ const App = (() => {
 
       tableBody.appendChild(tr);
     });
-    Stats.renderStats(myPieces);
   };
   const addOrEditPiece = (title, composer, pages, learnt, id) => {
     const piece = Piece(title, composer, pages, learnt);
@@ -102,11 +103,11 @@ const App = (() => {
     } else {
       myPieces.push(piece);
     }
-    render();
+    EventManager.publish("piecesChanged", myPieces);
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
-    render();
+    EventManager.publish("piecesChanged", myPieces);
   };
   const showForm = (id) => {
     formContainer.style.display = "flex";
@@ -132,9 +133,9 @@ const App = (() => {
   const editPiece = (id) => {
     showForm(id);
   };
-  render();
 
   // bind Events
+  EventManager.subscribe("piecesChanged", render);
   addButton.addEventListener("click", () => {
     showForm();
   });
@@ -164,5 +165,6 @@ const App = (() => {
     }
   });
 
+  EventManager.publish("piecesChanged", myPieces);
   return { myPieces, addOrEditPiece, deletePiece };
 })();
