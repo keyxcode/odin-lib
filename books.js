@@ -134,6 +134,7 @@ const App = (() => {
   });
   window.addEventListener("click", (e) => {
     if (e.target === formContainer) {
+      clearForm();
       hideForm();
     }
   });
