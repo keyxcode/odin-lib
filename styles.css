@@ -117,15 +117,13 @@ footer {
   transform: scale(1.02);
 }
 
-.edit-del-row {
-  text-align: right;
-}
-
-.card-title {
+.card-title,
+#main-card-title {
   font-weight: 900;
 }
 
-.card-composer {
+.card-composer,
+#main-card-composer {
   font-style: italic;
 }
 
@@ -133,8 +131,14 @@ footer {
   color: var(--dark);
 }
 
-.finished {
+.finished,
+#main-card-finished {
   color: green;
+}
+
+#main-card-buttons-row {
+  padding-top: 20px;
+  text-align: right;
 }
 
 #cards-container {
@@ -145,7 +149,8 @@ footer {
   margin-bottom: 50px;
 }
 
-#form-container {
+#form-container,
+#main-card-container {
   display: none;
   width: 100%;
   height: 100%;
@@ -156,7 +161,8 @@ footer {
   z-index: 1;
 }
 
-#piece-form {
+#piece-form,
+#main-card {
   width: max(25%, 200px);
   flex-grow: 0;
   display: grid;
