@@ -70,8 +70,7 @@ const Cards = (() => {
       piece.learnt ? `Finished` : `In progress`
     }</div>
       </div>
-      <div>
-      </div>
+      <div>${piece.comments}</div>
       <div class="edit-del-row">
         <button class="edit">Edit</button>
         <button class="del">Del</button>
@@ -103,20 +102,21 @@ const Cards = (() => {
 
 //= ===================================================================
 // Information holder – knows certain information and provides that information
-const Piece = (title, composer, pages, learnt) => ({
+const Piece = (title, composer, pages, learnt, comments) => ({
   title,
   composer,
   pages,
   learnt,
+  comments,
 });
 
 // Demo pieces
-const piece1 = Piece("Sonata", "Beethoven", 5, true);
-const piece2 = Piece("Concerto", "Mozart", 3, false);
-const piece3 = Piece("Sonata", "Beethoven", 5, true);
-const piece4 = Piece("Concerto", "Mozart", 3, false);
-const piece5 = Piece("Sonata", "Beethoven", 5, true);
-const piece6 = Piece("Concerto", "Mozart", 3, false);
+const piece1 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
+const piece2 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
+const piece3 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
+const piece4 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
+const piece5 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
+const piece6 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
 
 //= ===================================================================
 // Information holder – knows certain information and provides that information
