@@ -1,17 +1,17 @@
 :root {
   --global-radius: 10px;
 
-  /* --darkest: #252627;
+  --darkest: #252627;
   --dark: #904e55;
   --mid: #564e58;
   --light: #bfb48f;
-  --lightest: #f2efe9; */
+  --lightest: #f2efe9;
 
-  --darkest: #272643;
+  /* --darkest: #272643;
   --dark: #2c698d;
   --mid: #bae8e8;
   --light: #e3f6f5;
-  --lightest: #ffffff;
+  --lightest: #ffffff; */
 }
 
 html {
@@ -76,7 +76,7 @@ table,
   background-color: var(--lightest);
   border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
-  padding: 10px;
+  padding: 20px;
 }
 
 #dashboard {
@@ -99,7 +99,7 @@ table {
 }
 
 #cards-container {
-  width: max(50%, 200px);
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;

@@ -53,38 +53,38 @@ const Stats = (() => {
 
 //= ===================================================================
 // Service provider – performs specific work and offers services to others on demand
-const Table = (() => {
-  // cache DOM
-  const tableBody = document.querySelector("#table-body");
+// const Table = (() => {
+//   // cache DOM
+//   const tableBody = document.querySelector("#table-body");
 
-  const render = (pieces) => {
-    // without any arg, replaceChildren() removes all children
-    tableBody.replaceChildren();
-    let index = 0;
+//   const render = (pieces) => {
+//     // without any arg, replaceChildren() removes all children
+//     tableBody.replaceChildren();
+//     let index = 0;
 
-    pieces.forEach((piece) => {
-      const tr = tableBody.insertRow();
-      tr.dataset.id = index;
-      index += 1;
-      Object.entries(piece).forEach(([key, value]) => {
-        const cell = tr.insertCell();
-        cell.innerHTML = value;
-      });
+//     pieces.forEach((piece) => {
+//       const tr = tableBody.insertRow();
+//       tr.dataset.id = index;
+//       index += 1;
+//       Object.entries(piece).forEach(([key, value]) => {
+//         const cell = tr.insertCell();
+//         cell.innerHTML = value;
+//       });
 
-      const editCell = tr.insertCell();
-      editCell.innerHTML = `<button class="edit">Edit</button>`;
-      const delCell = tr.insertCell();
-      delCell.innerHTML = `<button class="del">Del</button>`;
+//       const editCell = tr.insertCell();
+//       editCell.innerHTML = `<button class="edit">Edit</button>`;
+//       const delCell = tr.insertCell();
+//       delCell.innerHTML = `<button class="del">Del</button>`;
 
-      tableBody.appendChild(tr);
-    });
-  };
+//       tableBody.appendChild(tr);
+//     });
+//   };
 
-  // bind Events
-  EventManager.subscribe("piecesChanged", (pieces) => {
-    render(pieces);
-  });
-})();
+//   // bind Events
+//   EventManager.subscribe("piecesChanged", (pieces) => {
+//     render(pieces);
+//   });
+// })();
 
 //= ===================================================================
 // Service provider – performs specific work and offers services to others on demand
@@ -147,7 +147,7 @@ const Storage = (() => {
   const myPieces = [piece1, piece2, piece3, piece4, piece5, piece6];
 
   // cache DOM
-  const tableBody = document.querySelector("#table-body");
+  const cardsContainer = document.querySelector("#cards-container");
   const addButton = document.querySelector("#add");
   const formContainer = document.querySelector("#form-container");
   const pieceForm = document.querySelector("#piece-form");
@@ -216,7 +216,7 @@ const Storage = (() => {
       hideForm();
     }
   });
-  window.addEventListener("click", (e) => {
+  cardsContainer.addEventListener("click", (e) => {
     const pieceID = e.target.parentNode.dataset.id;
     if (e.target.classList.contains("del")) {
       deletePiece(pieceID);
@@ -225,7 +225,7 @@ const Storage = (() => {
     }
   });
 
-  // init stats and piece table publishing this event
+  // init stats and pieces layout by publishing this event
   EventManager.publish("piecesChanged", myPieces);
 
   return { myPieces };
