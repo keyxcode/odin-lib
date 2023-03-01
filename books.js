@@ -52,21 +52,8 @@ const Stats = (() => {
 })();
 
 //= ===================================================================
-// Information holder – knows certain information and provides that information
-const Piece = (title, composer, pages, learnt) => ({
-  title,
-  composer,
-  pages,
-  learnt,
-});
-
-// Demo pieces
-const piece1 = Piece("Sonata", "Beethoven", 5, true);
-const piece2 = Piece("Concerto", "Mozart", 3, false);
-
-//= ===================================================================
 // Service provider – performs specific work and offers services to others on demand
-const PiecesTable = (() => {
+const Table = (() => {
   // cache DOM
   const tableBody = document.querySelector("#table-body");
 
@@ -100,7 +87,21 @@ const PiecesTable = (() => {
 })();
 
 //= ===================================================================
-const PiecesStorage = (() => {
+// Information holder – knows certain information and provides that information
+const Piece = (title, composer, pages, learnt) => ({
+  title,
+  composer,
+  pages,
+  learnt,
+});
+
+// Demo pieces
+const piece1 = Piece("Sonata", "Beethoven", 5, true);
+const piece2 = Piece("Concerto", "Mozart", 3, false);
+
+//= ===================================================================
+// Information holder – knows certain information and provides that information
+const Storage = (() => {
   const myPieces = [piece1, piece2];
 
   // cache DOM
