@@ -71,7 +71,8 @@ footer {
 }
 
 #dashboard,
-table {
+table,
+.card {
   background-color: var(--lightest);
   border-radius: var(--global-radius);
   border: 2px solid var(--darkest);
@@ -95,6 +96,13 @@ table {
   width: max(50%, 200px);
   text-align: center;
   margin-bottom: 50px;
+}
+
+#cards-container {
+  width: max(50%, 200px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 }
 
 #form-container {

@@ -87,6 +87,44 @@ const Table = (() => {
 })();
 
 //= ===================================================================
+// Service provider – performs specific work and offers services to others on demand
+const Cards = (() => {
+  // cache DOM
+  const cardsContainer = document.querySelector("#cards-container");
+
+  const createCard = (piece) => {
+    const card = document.createElement("div");
+    const cardHTML = `
+      <div>${piece.title}</div>
+      <div>${piece.composer}</div>
+      <div>${piece.pages} pages</div>
+      <div>${piece.finished ? `Finished` : `In progress`}</div>
+      <button class="edit">Edit</button>
+      <button class="del">Del</button>
+    `;
+    card.innerHTML = cardHTML;
+    return card;
+  };
+  const render = (pieces) => {
+    // without any arg, replaceChildren() removes all children
+    cardsContainer.replaceChildren();
+    let i = 0;
+    pieces.forEach((piece) => {
+      const card = createCard(piece);
+      card.classList.add("card");
+      card.dataset.id = i;
+      cardsContainer.appendChild(card);
+      i += 1;
+    });
+  };
+
+  // bind Events
+  EventManager.subscribe("piecesChanged", (pieces) => {
+    render(pieces);
+  });
+})();
+
+//= ===================================================================
 // Information holder – knows certain information and provides that information
 const Piece = (title, composer, pages, learnt) => ({
   title,
@@ -98,11 +136,15 @@ const Piece = (title, composer, pages, learnt) => ({
 // Demo pieces
 const piece1 = Piece("Sonata", "Beethoven", 5, true);
 const piece2 = Piece("Concerto", "Mozart", 3, false);
+const piece3 = Piece("Sonata", "Beethoven", 5, true);
+const piece4 = Piece("Concerto", "Mozart", 3, false);
+const piece5 = Piece("Sonata", "Beethoven", 5, true);
+const piece6 = Piece("Concerto", "Mozart", 3, false);
 
 //= ===================================================================
 // Information holder – knows certain information and provides that information
 const Storage = (() => {
-  const myPieces = [piece1, piece2];
+  const myPieces = [piece1, piece2, piece3, piece4, piece5, piece6];
 
   // cache DOM
   const tableBody = document.querySelector("#table-body");
@@ -174,8 +216,8 @@ const Storage = (() => {
       hideForm();
     }
   });
-  tableBody.addEventListener("click", (e) => {
-    const pieceID = e.target.parentNode.parentNode.dataset.id;
+  window.addEventListener("click", (e) => {
+    const pieceID = e.target.parentNode.dataset.id;
     if (e.target.classList.contains("del")) {
       deletePiece(pieceID);
     } else if (e.target.classList.contains("edit")) {
