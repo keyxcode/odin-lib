@@ -21,30 +21,45 @@
   </head>
   <body>
     <header>My Repertoire</header>
+
     <!--PIECE FORM-->
     <div id="form-container">
       <form id="piece-form">
-        <div>
-          <input type="text" id="title" placeholder="Title" />
-        </div>
-        <div>
-          <input type="text" id="composer" placeholder="Composer" />
-        </div>
-        <div>
-          <input type="number" id="pages" placeholder="Number of pages" />
-        </div>
+        <input type="text" id="title" placeholder="Title" />
+        <input type="text" id="composer" placeholder="Composer" />
+        <input type="number" id="pages" placeholder="Number of pages" />
         <div id="checkbox-container">
           <label for="checkbox">Finished</label>
           <input type="checkbox" id="learnt" />
         </div>
-        <div>
-          <label for="comments">Other comments</label>
-          <textarea id="comments" rows="5"></textarea>
-        </div>
+        <textarea
+          id="comments"
+          placeholder="Other comments"
+          rows="5"
+        ></textarea>
         <input type="submit" id="submit" value="Save" />
         <input type="hidden" id="form-id" value="" />
       </form>
     </div>
+    <!--CARD-->
+    <!-- <div id="form-container">
+      <form id="piece-form">
+        <input type="text" id="title" placeholder="Title" />
+        <input type="text" id="composer" placeholder="Composer" />
+        <input type="number" id="pages" placeholder="Number of pages" />
+        <div id="checkbox-container">
+          <label for="checkbox">Finished</label>
+          <input type="checkbox" id="learnt" />
+        </div>
+        <textarea
+          id="comments"
+          placeholder="Other comments"
+          rows="5"
+        ></textarea>
+        <input type="submit" id="submit" value="Save" />
+        <input type="hidden" id="form-id" value="" />
+      </form>
+    </div> -->
     <!--MAIN APP-->
     <div class="page-container">
       <!--STATS-->

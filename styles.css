@@ -197,10 +197,6 @@ textarea {
   white-space: pre-wrap; /* let the text wrap preserving spaces */
 }
 
-form > div {
-  display: grid;
-}
-
 #checkbox-container {
   display: flex;
 }
