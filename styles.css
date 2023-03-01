@@ -48,7 +48,7 @@ button:active,
 }
 
 body {
-  background-color: var(--light);
+  background-color: var(--mid);
   height: 100vh;
   margin: 0;
   display: flex;
@@ -67,7 +67,7 @@ body {
 header,
 footer {
   background-color: var(--darkest);
-  color: var(--light);
+  color: var(--lightest);
 }
 
 header {
