@@ -73,7 +73,6 @@ footer {
 }
 
 #dashboard,
-table,
 .card {
   background-color: var(--lightest);
   border-radius: var(--global-radius);
@@ -88,16 +87,11 @@ table,
   justify-items: center;
   gap: 10px;
   margin: 50px auto;
+  font-weight: bold;
 }
 
 #add {
   grid-column: 1/4;
-}
-
-table {
-  width: max(50%, 200px);
-  text-align: center;
-  margin-bottom: 50px;
 }
 
 .card {
@@ -163,8 +157,4 @@ form > div {
 
 #checkbox-container {
   display: flex;
-}
-
-.bold {
-  font-weight: bold;
 }
