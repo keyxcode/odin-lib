@@ -46,7 +46,7 @@ const Stats = (() => {
   };
 
   // bind events
-  EventManager.subscribe("numPiecesChanged", (pieces) => {
+  EventManager.subscribe("piecesChanged", (pieces) => {
     render(pieces);
   });
 })();
@@ -94,7 +94,9 @@ const PiecesTable = (() => {
   };
 
   // bind Events
-  EventManager.subscribe("numPiecesChanged", render);
+  EventManager.subscribe("piecesChanged", (pieces) => {
+    render(pieces);
+  });
 })();
 
 //= ===================================================================
@@ -110,7 +112,7 @@ const PiecesStorage = (() => {
   const formComposer = document.querySelector("#composer");
   const formPages = document.querySelector("#pages");
   const formLearnt = document.querySelector("#learnt");
-  // form ID is a hidden value, always empty unless showForm() has an id passed in
+  // form-id is a hidden value, always empty unless showForm() has an id passed in
   const formID = document.querySelector("#form-id");
 
   const showForm = (id) => {
@@ -142,12 +144,12 @@ const PiecesStorage = (() => {
       myPieces[id] = piece;
     } else {
       myPieces.push(piece);
-      EventManager.publish("numPiecesChanged", myPieces);
     }
+    EventManager.publish("piecesChanged", myPieces);
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
-    EventManager.publish("numPiecesChanged", myPieces);
+    EventManager.publish("piecesChanged", myPieces);
   };
 
   // bind Events
@@ -171,7 +173,6 @@ const PiecesStorage = (() => {
       hideForm();
     }
   });
-
   tableBody.addEventListener("click", (e) => {
     const pieceID = e.target.parentNode.parentNode.dataset.id;
     if (e.target.classList.contains("del")) {
@@ -182,7 +183,7 @@ const PiecesStorage = (() => {
   });
 
   // init stats and piece table publishing this event
-  EventManager.publish("numPiecesChanged", myPieces);
+  EventManager.publish("piecesChanged", myPieces);
 
-  return { myPieces, addOrEditPiece, deletePiece };
+  return { myPieces };
 })();
