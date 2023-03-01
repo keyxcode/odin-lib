@@ -56,6 +56,7 @@ const Stats = (() => {
 const Cards = (() => {
   // cache DOM
   const cardsContainer = document.querySelector("#cards-container");
+  let cards = document.querySelectorAll(".card");
 
   const createCard = (piece) => {
     const card = document.createElement("div");
@@ -92,9 +93,18 @@ const Cards = (() => {
       cardsContainer.appendChild(card);
       i -= 1;
     });
+
+    // recache new cards
+    cards = document.querySelectorAll(".card");
+    // bind events
+    cards.forEach((card) =>
+      card.addEventListener("click", () => {
+        EventManager.publish("cardClicked", card);
+      })
+    );
   };
 
-  // bind Events
+  // bind events
   EventManager.subscribe("piecesChanged", (pieces) => {
     render(pieces);
   });
@@ -112,23 +122,47 @@ const Piece = (title, composer, pages, learnt, comments) => ({
 
 // demo pieces
 const piece1 = Piece(
-  "Sonata",
-  "Beethoven",
-  5,
+  "Waltz for Debby",
+  "Bill Evans",
+  4,
   true,
-  "abcxyzlmnpq\nasdfasdfasabcxyzlmnpq\nasdfasdfas\nasdfasdfasabcxyzlmnpq\nasdfasdfas"
+  "3/4 but feels like 1/4\nHas two alternative endings"
 );
 const piece2 = Piece(
-  "Concerto",
-  "Mozart",
-  3,
+  "Waltz in B minor",
+  "Bill Evans",
+  4,
   false,
-  "abcxyzlmnpqabcxyzlmnpqadsfasdfasdf"
+  "Pay attention to key changes\n"
 );
-const piece3 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
-const piece4 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
-const piece5 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
-const piece6 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
+const piece3 = Piece(
+  "Le cygne",
+  "Camille Saint-Saëns",
+  5,
+  true,
+  "Originally written for solo cello and 2 pianos\nSteady and soft left-hand accompaniment"
+);
+const piece4 = Piece(
+  "Piano Sonata No. 8 II. Adagio cantabile",
+  "Ludwig V. Beethoven",
+  4,
+  true,
+  "Listen to Baremboim's version"
+);
+const piece5 = Piece(
+  "Clair de lune ",
+  "Claude Debussy",
+  6,
+  true,
+  "Make use of half-pedalling\nListen to the original poem by Paul Verlaine for inspiration"
+);
+const piece6 = Piece(
+  "Salut d'Amour Op.12",
+  "Edward Elgar ",
+  5,
+  false,
+  "Originally written for piano and violin\nTry to make the right hand legato lines sing like a violin"
+);
 
 //= ===================================================================
 // Information holder – knows certain information and provides that information
@@ -216,6 +250,10 @@ const Storage = (() => {
     } else if (e.target.classList.contains("edit")) {
       showForm(pieceID);
     }
+  });
+  EventManager.subscribe("cardClicked", (card) => {
+    const pieceID = card.dataset.id;
+    showForm(pieceID);
   });
 
   // init stats and pieces layout by publishing this event
