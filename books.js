@@ -1,29 +1,30 @@
+// Coordinator – doesn’t make many decisions but delegates work to other objects.
 const EventManager = (() => {
   // the events object contains pairs of: event - [list of corresponding callbacks]
   const events = {};
 
   const publish = (event, arg) => {
     if (!events[event]) return;
-
-    events[event].forEach((callBack) => {
-      callBack(arg);
+    events[event].forEach((callback) => {
+      callback(arg);
     });
   };
-  const subscribe = (event, callBack) => {
+  const subscribe = (event, callback) => {
     events[event] = events[event] === undefined ? [] : events[event];
-    events[event].push(callBack);
+    events[event].push(callback);
   };
-  const unsubscribe = (event, callBack) => {
+  const unsubscribe = (event, callback) => {
     if (!events[event]) return;
-
-    const callBacks = events[event];
-    const callBackID = callBacks.indexOf(callBack);
-    if (callBackID >= 0) callBacks.splice(callBackID, 1);
+    const callbacks = events[event];
+    const callbackID = callbacks.indexOf(callback);
+    if (callbackID >= 0) callbacks.splice(callbackID, 1);
   };
 
   return { publish, subscribe, unsubscribe };
 })();
 
+//= ===================================================================
+// Service provider – performs specific work and offers services to others on demand
 const Stats = (() => {
   // cache DOM
   const total = document.querySelector("#total");
@@ -37,18 +38,20 @@ const Stats = (() => {
     return { numTotal, numFinished, numToLearn };
   };
 
-  const renderStats = (pieces) => {
+  const render = (pieces) => {
     const stats = parsePiecesStats(pieces);
     total.innerText = stats.numTotal;
     finished.innerText = stats.numFinished;
     toLearn.innerText = stats.numToLearn;
   };
 
-  EventManager.subscribe("piecesChanged", (pieces) => {
-    renderStats(pieces);
+  EventManager.subscribe("numPiecesChanged", (pieces) => {
+    render(pieces);
   });
 })();
 
+//= ===================================================================
+// Information holder – knows certain information and provides that information
 const Piece = (title, composer, pages, learnt) => ({
   title,
   composer,
@@ -60,6 +63,8 @@ const Piece = (title, composer, pages, learnt) => ({
 const piece1 = Piece("Sonata", "Beethoven", 5, true);
 const piece2 = Piece("Concerto", "Mozart", 3, false);
 
+//= ===================================================================
+// Controller – makes decisions and controls a complex task.
 const App = (() => {
   const myPieces = [piece1, piece2];
 
@@ -102,12 +107,12 @@ const App = (() => {
       myPieces[id] = piece;
     } else {
       myPieces.push(piece);
+      EventManager.publish("numPiecesChanged", myPieces);
     }
-    EventManager.publish("piecesChanged", myPieces);
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
-    EventManager.publish("piecesChanged", myPieces);
+    EventManager.publish("numPiecesChanged", myPieces);
   };
   const showForm = (id) => {
     formContainer.style.display = "flex";
@@ -135,7 +140,7 @@ const App = (() => {
   };
 
   // bind Events
-  EventManager.subscribe("piecesChanged", render);
+  EventManager.subscribe("numPiecesChanged", render);
   addButton.addEventListener("click", () => {
     showForm();
   });
@@ -165,6 +170,7 @@ const App = (() => {
     }
   });
 
-  EventManager.publish("piecesChanged", myPieces);
+  // init stats and pieces display
+  EventManager.publish("numPiecesChanged", myPieces);
   return { myPieces, addOrEditPiece, deletePiece };
 })();
