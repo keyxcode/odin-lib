@@ -57,14 +57,13 @@
     <!--MAIN APP-->
     <div class="page-container">
       <!--STATS-->
-      <div id="dashboard">
-        <div>Total</div>
-        <div>Finished</div>
-        <div>Learning</div>
-        <div id="total"></div>
-        <div id="finished"></div>
-        <div id="to-learn"></div>
-        <button id="add">ADD NEW</button>
+      <div id="stats">
+        <button id="add">+</button>
+        <div>
+          <div>Total: <span id="total"></span></div>
+          <div class="finished">Finished: <span id="finished"></span></div>
+          <div class="progress">Learning: <span id="to-learn"></span></div>
+        </div>
       </div>
       <!--PIECES LIST-->
       <div id="cards-container"></div>
