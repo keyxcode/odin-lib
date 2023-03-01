@@ -37,6 +37,8 @@ button:hover,
   background-color: var(--darkest);
   border: 1px solid var(--darkest);
   color: var(--lightest);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 body {
@@ -98,10 +100,35 @@ table {
   margin-bottom: 50px;
 }
 
+.card {
+  display: grid;
+  gap: 10px;
+}
+
+.edit-del-row {
+  text-align: right;
+}
+
+.card-title {
+  font-weight: 900;
+}
+
+.card-composer {
+  font-style: italic;
+}
+
+.progress {
+  color: var(--dark);
+}
+
+.finished {
+  color: green;
+}
+
 #cards-container {
   width: 80%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
 }
 

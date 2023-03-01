@@ -95,12 +95,22 @@ const Cards = (() => {
   const createCard = (piece) => {
     const card = document.createElement("div");
     const cardHTML = `
-      <div>${piece.title}</div>
-      <div>${piece.composer}</div>
-      <div>${piece.pages} pages</div>
-      <div>${piece.finished ? `Finished` : `In progress`}</div>
-      <button class="edit">Edit</button>
-      <button class="del">Del</button>
+      <div>
+        <div class="card-title">${piece.title}</div>
+        <div class="card-composer">${piece.composer}</div>
+      </div>
+      <div>
+        <div>${piece.pages} pages</div>
+        <div class="${piece.learnt ? `finished` : `progress`}">${
+      piece.learnt ? `Finished` : `In progress`
+    }</div>
+      </div>
+      <div>
+      </div>
+      <div class="edit-del-row">
+        <button class="edit">Edit</button>
+        <button class="del">Del</button>
+      </div>
     `;
     card.innerHTML = cardHTML;
     return card;
@@ -108,13 +118,15 @@ const Cards = (() => {
   const render = (pieces) => {
     // without any arg, replaceChildren() removes all children
     cardsContainer.replaceChildren();
-    let i = 0;
-    pieces.forEach((piece) => {
+    // this is so that the newest addition is shown first
+    const reversedPieces = pieces.slice().reverse();
+    let i = reversedPieces.length - 1;
+    reversedPieces.forEach((piece) => {
       const card = createCard(piece);
       card.classList.add("card");
       card.dataset.id = i;
       cardsContainer.appendChild(card);
-      i += 1;
+      i -= 1;
     });
   };
 
@@ -217,7 +229,7 @@ const Storage = (() => {
     }
   });
   cardsContainer.addEventListener("click", (e) => {
-    const pieceID = e.target.parentNode.dataset.id;
+    const pieceID = e.target.parentNode.parentNode.dataset.id;
     if (e.target.classList.contains("del")) {
       deletePiece(pieceID);
     } else if (e.target.classList.contains("edit")) {
