@@ -183,15 +183,12 @@ textarea {
 }
 
 .piece-comments {
-  /* white-space: pre;
-  overflow-wrap: break-word; */
-
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-
-  line-height: 2.5ex;
-  height: 7.5ex;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
+  white-space: pre-wrap; /* let the text wrap preserving spaces */
 }
 
 form > div {

@@ -110,9 +110,21 @@ const Piece = (title, composer, pages, learnt, comments) => ({
   comments,
 });
 
-// Demo pieces
-const piece1 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq\nasdfasdfas");
-const piece2 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
+// demo pieces
+const piece1 = Piece(
+  "Sonata",
+  "Beethoven",
+  5,
+  true,
+  "abcxyzlmnpq\nasdfasdfasabcxyzlmnpq\nasdfasdfas\nasdfasdfasabcxyzlmnpq\nasdfasdfas"
+);
+const piece2 = Piece(
+  "Concerto",
+  "Mozart",
+  3,
+  false,
+  "abcxyzlmnpqabcxyzlmnpqadsfasdfasdf"
+);
 const piece3 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
 const piece4 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
 const piece5 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
