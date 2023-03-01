@@ -1,5 +1,5 @@
 :root {
-  --global-radius: 10px;
+  --global-radius: 2px;
   --box-shadow: 2px 2px 5px #6b4d4b73, -2px 2px 5px #6b4d4b73;
   --box-shadow-thin: 1px 1px 3px #6b4d4b73, -1px 1px 3px #6b4d4b73;
 
@@ -163,7 +163,6 @@ footer {
 
 #piece-form,
 #main-card {
-  width: max(25%, 200px);
   flex-grow: 0;
   display: grid;
   background-color: var(--lightest);
