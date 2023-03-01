@@ -45,6 +45,7 @@ const Stats = (() => {
     toLearn.innerText = stats.numToLearn;
   };
 
+  // bind events
   EventManager.subscribe("numPiecesChanged", (pieces) => {
     render(pieces);
   });
@@ -64,27 +65,17 @@ const piece1 = Piece("Sonata", "Beethoven", 5, true);
 const piece2 = Piece("Concerto", "Mozart", 3, false);
 
 //= ===================================================================
-// Controller – makes decisions and controls a complex task.
-const App = (() => {
-  const myPieces = [piece1, piece2];
-
+// Service provider – performs specific work and offers services to others on demand
+const PiecesTable = (() => {
   // cache DOM
-  const addButton = document.querySelector("#add");
   const tableBody = document.querySelector("#table-body");
-  const formContainer = document.querySelector("#form-container");
-  const pieceForm = document.querySelector("#piece-form");
-  const formTitle = document.querySelector("#title");
-  const formComposer = document.querySelector("#composer");
-  const formPages = document.querySelector("#pages");
-  const formLearnt = document.querySelector("#learnt");
-  const formID = document.querySelector("#form-id");
 
-  const render = () => {
+  const render = (pieces) => {
     // without any arg, replaceChildren() removes all children
     tableBody.replaceChildren();
     let index = 0;
 
-    myPieces.forEach((piece) => {
+    pieces.forEach((piece) => {
       const tr = tableBody.insertRow();
       tr.dataset.id = index;
       index += 1;
@@ -101,21 +92,30 @@ const App = (() => {
       tableBody.appendChild(tr);
     });
   };
-  const addOrEditPiece = (title, composer, pages, learnt, id) => {
-    const piece = Piece(title, composer, pages, learnt);
-    if (id) {
-      myPieces[id] = piece;
-    } else {
-      myPieces.push(piece);
-      EventManager.publish("numPiecesChanged", myPieces);
-    }
-  };
-  const deletePiece = (id) => {
-    myPieces.splice(id, 1);
-    EventManager.publish("numPiecesChanged", myPieces);
-  };
+
+  // bind Events
+  EventManager.subscribe("numPiecesChanged", render);
+})();
+
+//= ===================================================================
+const PiecesStorage = (() => {
+  const myPieces = [piece1, piece2];
+
+  // cache DOM
+  const tableBody = document.querySelector("#table-body");
+  const addButton = document.querySelector("#add");
+  const formContainer = document.querySelector("#form-container");
+  const pieceForm = document.querySelector("#piece-form");
+  const formTitle = document.querySelector("#title");
+  const formComposer = document.querySelector("#composer");
+  const formPages = document.querySelector("#pages");
+  const formLearnt = document.querySelector("#learnt");
+  // form ID is a hidden value, always empty unless showForm() has an id passed in
+  const formID = document.querySelector("#form-id");
+
   const showForm = (id) => {
     formContainer.style.display = "flex";
+    // if an id is passed in, prefill the form with info the piece with that id
     if (id) {
       const pieceToEdit = myPieces[id];
       formTitle.value = pieceToEdit.title;
@@ -135,22 +135,24 @@ const App = (() => {
     formLearnt.value = false;
     formID.value = "";
   };
-  const editPiece = (id) => {
-    showForm(id);
+  const addOrEditPiece = (title, composer, pages, learnt, id) => {
+    const piece = Piece(title, composer, pages, learnt);
+    if (id) {
+      // update the existing piece with new values
+      myPieces[id] = piece;
+    } else {
+      myPieces.push(piece);
+      EventManager.publish("numPiecesChanged", myPieces);
+    }
+  };
+  const deletePiece = (id) => {
+    myPieces.splice(id, 1);
+    EventManager.publish("numPiecesChanged", myPieces);
   };
 
   // bind Events
-  EventManager.subscribe("numPiecesChanged", render);
   addButton.addEventListener("click", () => {
     showForm();
-  });
-  tableBody.addEventListener("click", (e) => {
-    const pieceID = e.target.parentNode.parentNode.dataset.id;
-    if (e.target.classList.contains("del")) {
-      deletePiece(pieceID);
-    } else if (e.target.classList.contains("edit")) {
-      editPiece(pieceID);
-    }
   });
   pieceForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -170,7 +172,17 @@ const App = (() => {
     }
   });
 
-  // init stats and pieces display
+  tableBody.addEventListener("click", (e) => {
+    const pieceID = e.target.parentNode.parentNode.dataset.id;
+    if (e.target.classList.contains("del")) {
+      deletePiece(pieceID);
+    } else if (e.target.classList.contains("edit")) {
+      showForm(pieceID);
+    }
+  });
+
+  // init stats and piece table publishing this event
   EventManager.publish("numPiecesChanged", myPieces);
+
   return { myPieces, addOrEditPiece, deletePiece };
 })();
