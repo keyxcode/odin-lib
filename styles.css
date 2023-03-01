@@ -1,5 +1,7 @@
 :root {
   --global-radius: 10px;
+  --box-shadow: 2px 2px 5px #6b4d4b73, -2px 2px 5px #6b4d4b73;
+  --box-shadow-thin: 1px 1px 3px #6b4d4b73, -1px 1px 3px #6b4d4b73;
 
   --darkest: #252627;
   --dark: #904e55;
@@ -34,34 +36,44 @@ button,
 
 button:hover,
 #submit:hover {
-  background-color: var(--darkest);
-  border: 1px solid var(--darkest);
+  cursor: pointer;
+  filter: brightness(95%);
   color: var(--lightest);
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: var(--box-shadow);
+}
+
+button:active,
+#submit:active {
+  filter: brightness(85%);
 }
 
 body {
   background-color: var(--light);
   height: 100vh;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 92vh;
+  justify-content: start;
+  flex-grow: 1;
 }
 
 header,
 footer {
-  text-align: center;
-  font-size: 30px;
   background-color: var(--darkest);
-  color: var(--lightest);
+  color: var(--light);
+}
+
+header {
+  text-align: left;
+  font-size: 24px;
   padding: 20px;
-  width: 100%;
 }
 
 footer {
@@ -76,8 +88,8 @@ footer {
 .card {
   background-color: var(--lightest);
   border-radius: var(--global-radius);
-  border: 2px solid var(--darkest);
   padding: 20px;
+  box-shadow: var(--box-shadow-thin);
 }
 
 #dashboard {
@@ -124,6 +136,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
+  margin-bottom: 50px;
 }
 
 #form-container {
