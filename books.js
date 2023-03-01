@@ -70,7 +70,7 @@ const Cards = (() => {
       piece.learnt ? `Finished` : `In progress`
     }</div>
       </div>
-      <div>${piece.comments}</div>
+      <div class="piece-comments">${piece.comments}</div>
       <div class="edit-del-row">
         <button class="edit">Edit</button>
         <button class="del">Del</button>
@@ -111,7 +111,7 @@ const Piece = (title, composer, pages, learnt, comments) => ({
 });
 
 // Demo pieces
-const piece1 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
+const piece1 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq\nasdfasdfas");
 const piece2 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
 const piece3 = Piece("Sonata", "Beethoven", 5, true, "abcxyzlmnpq");
 const piece4 = Piece("Concerto", "Mozart", 3, false, "abcxyzlmnpq");
@@ -132,6 +132,7 @@ const Storage = (() => {
   const formComposer = document.querySelector("#composer");
   const formPages = document.querySelector("#pages");
   const formLearnt = document.querySelector("#learnt");
+  const formComments = document.querySelector("#comments");
   // form-id is a hidden value, always empty unless showForm() has an id passed in
   const formID = document.querySelector("#form-id");
 
@@ -145,6 +146,7 @@ const Storage = (() => {
       formPages.value = pieceToEdit.pages;
       formLearnt.checked = pieceToEdit.learnt;
       formID.value = id;
+      formComments.value = pieceToEdit.comments;
     }
   };
   const hideForm = () => {
@@ -154,11 +156,12 @@ const Storage = (() => {
     formTitle.value = "";
     formComposer.value = "";
     formPages.value = "";
-    formLearnt.value = false;
+    formLearnt.checked = false;
     formID.value = "";
+    formComments.value = "";
   };
-  const addOrEditPiece = (title, composer, pages, learnt, id) => {
-    const piece = Piece(title, composer, pages, learnt);
+  const addOrEditPiece = (title, composer, pages, learnt, id, comments) => {
+    const piece = Piece(title, composer, pages, learnt, comments);
     if (id) {
       // update the existing piece with new values
       myPieces[id] = piece;
@@ -183,7 +186,8 @@ const Storage = (() => {
     const pages = formPages.value;
     const learnt = formLearnt.checked;
     const id = formID.value;
-    addOrEditPiece(title, composer, pages, learnt, id);
+    const comments = formComments.value;
+    addOrEditPiece(title, composer, pages, learnt, id, comments);
     clearForm();
     hideForm();
   });

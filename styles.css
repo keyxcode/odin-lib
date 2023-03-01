@@ -152,16 +152,46 @@ footer {
 
 #piece-form {
   width: max(25%, 200px);
-  transform: translateY(-50%);
   flex-grow: 0;
   display: grid;
   background-color: var(--lightest);
-  border: 2px solid var(--darkest);
+  box-shadow: var(--box-shadow);
   color: var(--darkest);
   border-radius: var(--global-radius);
-  padding: 50px 10px;
-  justify-content: center;
+  padding: 50px 25px;
   gap: 10px;
+}
+
+input,
+input:hover,
+input:focus,
+input:active {
+  background-color: var(--lightest);
+  border: none;
+  border-bottom: 2px solid var(--dark);
+  outline: none;
+  font-size: 16px;
+}
+
+textarea {
+  background-color: var(--lightest);
+  border: 2px solid var(--dark);
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.piece-comments {
+  /* white-space: pre;
+  overflow-wrap: break-word; */
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  line-height: 2.5ex;
+  height: 7.5ex;
 }
 
 form > div {
