@@ -1,3 +1,4 @@
+import Piece from "./piece.js";
 import * as EventManager from "./event-manager.js";
 import * as Stats from "./stats.js";
 import * as Cards from "./cards.js";
@@ -9,15 +10,6 @@ EventManager.subscribe("piecesChanged", (pieces) => {
 });
 EventManager.subscribe("piecesChanged", (pieces) => {
   Cards.render(pieces);
-});
-//= ===================================================================
-// Information holder – knows certain information and provides that information
-const Piece = (title, composer, pages, learnt, comments) => ({
-  title,
-  composer,
-  pages,
-  learnt,
-  comments,
 });
 
 // demo pieces
@@ -64,10 +56,12 @@ const piece6 = Piece(
   "Originally written for piano and violin\nTry to make the right hand legato lines sing like a violin"
 );
 
+const demoPieces = [piece1, piece2, piece3, piece4, piece5, piece6];
+
 //= ===================================================================
 // Information holder – knows certain information and provides that information
 const PiecesStorage = (() => {
-  const myPieces = [piece1, piece2, piece3, piece4, piece5, piece6];
+  const myPieces = demoPieces;
 
   // cache DOM
   const addButton = document.querySelector("#add");
