@@ -3,9 +3,10 @@ import * as EventManager from "./event-manager.js";
 import * as Stats from "./stats.js";
 import * as Cards from "./cards.js";
 import * as PiecesStorage from "./pieces-storage.js";
+import * as PieceForm from "./piece-form.js";
 
 //= ===================================================================
-// bind events
+// Bind events
 EventManager.subscribe("piecesChanged", (pieces) => {
   Stats.render(pieces);
 });
@@ -13,7 +14,7 @@ EventManager.subscribe("piecesChanged", (pieces) => {
   Cards.render(pieces);
 });
 
-// demo pieces
+// Add demo pieces
 const DemoPieces = [
   Piece(
     "Waltz for Debby",
@@ -58,7 +59,6 @@ const DemoPieces = [
     "Originally written for piano and violin\nTry to make the right hand legato lines sing like a violin"
   ),
 ];
-
 DemoPieces.forEach((piece) =>
   PiecesStorage.addOrEditPiece(
     piece.title,
@@ -69,3 +69,8 @@ DemoPieces.forEach((piece) =>
     piece.comments
   )
 );
+
+const addButton = document.querySelector("#add");
+addButton.addEventListener("click", () => {
+  PieceForm.showForm();
+});
