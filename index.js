@@ -1,27 +1,4 @@
-// Coordinator – doesn’t make many decisions but delegates work to other objects.
-const EventManager = (() => {
-  // the events object contains pairs of: event - [list of corresponding callbacks]
-  const events = {};
-
-  const publish = (event, arg) => {
-    if (!events[event]) return;
-    events[event].forEach((callback) => {
-      callback(arg);
-    });
-  };
-  const subscribe = (event, callback) => {
-    events[event] = events[event] === undefined ? [] : events[event];
-    events[event].push(callback);
-  };
-  const unsubscribe = (event, callback) => {
-    if (!events[event]) return;
-    const callbacks = events[event];
-    const callbackID = callbacks.indexOf(callback);
-    if (callbackID >= 0) callbacks.splice(callbackID, 1);
-  };
-
-  return { publish, subscribe, unsubscribe };
-})();
+import { subscribe, publish } from "./event-manager.js";
 
 //= ===================================================================
 // Service provider – performs specific work and offers services to others on demand
@@ -46,7 +23,7 @@ const Stats = (() => {
   };
 
   // bind events
-  EventManager.subscribe("piecesChanged", (pieces) => {
+  subscribe("piecesChanged", (pieces) => {
     render(pieces);
   });
 })();
@@ -60,18 +37,18 @@ const Cards = (() => {
   const createCard = (piece) => {
     const card = document.createElement("div");
     const cardHTML = `
-      <div>
-        <div class="card-title">${piece.title}</div>
-        <div class="card-composer">${piece.composer}</div>
-      </div>
-      <div>
-        <div>${piece.pages} pages</div>
-        <div class="${piece.learnt ? `finished` : `progress`}">${
+        <div>
+          <div class="card-title">${piece.title}</div>
+          <div class="card-composer">${piece.composer}</div>
+        </div>
+        <div>
+          <div>${piece.pages} pages</div>
+          <div class="${piece.learnt ? `finished` : `progress`}">${
       piece.learnt ? `Finished` : `In progress`
     }</div>
-      </div>
-      <div class="piece-comments">${piece.comments}</div>
-    `;
+        </div>
+        <div class="piece-comments">${piece.comments}</div>
+      `;
     card.innerHTML = cardHTML;
     return card;
   };
@@ -92,11 +69,11 @@ const Cards = (() => {
     // recache new cards
     const cards = document.querySelectorAll(".card");
     // bind events
-    EventManager.publish("cardsChanged", cards);
+    publish("cardsChanged", cards);
   };
 
   // bind events
-  EventManager.subscribe("piecesChanged", (pieces) => {
+  subscribe("piecesChanged", (pieces) => {
     render(pieces);
   });
 })();
@@ -157,11 +134,10 @@ const piece6 = Piece(
 
 //= ===================================================================
 // Information holder – knows certain information and provides that information
-const Storage = (() => {
+const PiecesStorage = (() => {
   const myPieces = [piece1, piece2, piece3, piece4, piece5, piece6];
 
   // cache DOM
-  const cardsContainer = document.querySelector("#cards-container");
   const addButton = document.querySelector("#add");
   const mainCardContainer = document.querySelector("#main-card-container");
   const mainCardTitle = document.querySelector("#main-card-title");
@@ -242,15 +218,15 @@ const Storage = (() => {
     } else {
       myPieces.push(piece);
     }
-    EventManager.publish("piecesChanged", myPieces);
+    publish("piecesChanged", myPieces);
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
-    EventManager.publish("piecesChanged", myPieces);
+    publish("piecesChanged", myPieces);
   };
 
   // bind Events
-  EventManager.subscribe("cardsChanged", (changedCards) => {
+  subscribe("cardsChanged", (changedCards) => {
     changedCards.forEach((card) =>
       card.addEventListener("click", () => {
         const pieceID = card.dataset.id;
@@ -298,7 +274,7 @@ const Storage = (() => {
     hideMainCard();
   });
   // init stats and pieces layout by publishing this event
-  EventManager.publish("piecesChanged", myPieces);
+  publish("piecesChanged", myPieces);
 
   return { myPieces };
 })();
