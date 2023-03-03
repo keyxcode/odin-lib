@@ -1,83 +1,15 @@
-import { subscribe, publish } from "./event-manager.js";
+import * as EventManager from "./event-manager.js";
+import * as Stats from "./stats.js";
+import * as Cards from "./cards.js";
 
 //= ===================================================================
-// Service provider – performs specific work and offers services to others on demand
-const Stats = (() => {
-  // cache DOM
-  const total = document.querySelector("#total");
-  const finished = document.querySelector("#finished");
-  const toLearn = document.querySelector("#to-learn");
-
-  const parsePiecesStats = (pieces) => {
-    const numTotal = pieces.length;
-    const numFinished = pieces.filter((piece) => piece.learnt === true).length;
-    const numToLearn = numTotal - numFinished;
-    return { numTotal, numFinished, numToLearn };
-  };
-
-  const render = (pieces) => {
-    const stats = parsePiecesStats(pieces);
-    total.innerText = stats.numTotal;
-    finished.innerText = stats.numFinished;
-    toLearn.innerText = stats.numToLearn;
-  };
-
-  // bind events
-  subscribe("piecesChanged", (pieces) => {
-    render(pieces);
-  });
-})();
-
-//= ===================================================================
-// Service provider – performs specific work and offers services to others on demand
-const Cards = (() => {
-  // cache DOM
-  const cardsContainer = document.querySelector("#cards-container");
-
-  const createCard = (piece) => {
-    const card = document.createElement("div");
-    const cardHTML = `
-        <div>
-          <div class="card-title">${piece.title}</div>
-          <div class="card-composer">${piece.composer}</div>
-        </div>
-        <div>
-          <div>${piece.pages} pages</div>
-          <div class="${piece.learnt ? `finished` : `progress`}">${
-      piece.learnt ? `Finished` : `In progress`
-    }</div>
-        </div>
-        <div class="piece-comments">${piece.comments}</div>
-      `;
-    card.innerHTML = cardHTML;
-    return card;
-  };
-  const render = (pieces) => {
-    // without any arg, replaceChildren() removes all children
-    cardsContainer.replaceChildren();
-    // this is so that the newest addition is shown first
-    const reversedPieces = pieces.slice().reverse();
-    let i = reversedPieces.length - 1;
-    reversedPieces.forEach((piece) => {
-      const card = createCard(piece);
-      card.classList.add("card");
-      card.dataset.id = i;
-      cardsContainer.appendChild(card);
-      i -= 1;
-    });
-
-    // recache new cards
-    const cards = document.querySelectorAll(".card");
-    // bind events
-    publish("cardsChanged", cards);
-  };
-
-  // bind events
-  subscribe("piecesChanged", (pieces) => {
-    render(pieces);
-  });
-})();
-
+// bind events
+EventManager.subscribe("piecesChanged", (pieces) => {
+  Stats.render(pieces);
+});
+EventManager.subscribe("piecesChanged", (pieces) => {
+  Cards.render(pieces);
+});
 //= ===================================================================
 // Information holder – knows certain information and provides that information
 const Piece = (title, composer, pages, learnt, comments) => ({
@@ -218,15 +150,15 @@ const PiecesStorage = (() => {
     } else {
       myPieces.push(piece);
     }
-    publish("piecesChanged", myPieces);
+    EventManager.publish("piecesChanged", myPieces);
   };
   const deletePiece = (id) => {
     myPieces.splice(id, 1);
-    publish("piecesChanged", myPieces);
+    EventManager.publish("piecesChanged", myPieces);
   };
 
   // bind Events
-  subscribe("cardsChanged", (changedCards) => {
+  EventManager.subscribe("cardsChanged", (changedCards) => {
     changedCards.forEach((card) =>
       card.addEventListener("click", () => {
         const pieceID = card.dataset.id;
@@ -274,7 +206,7 @@ const PiecesStorage = (() => {
     hideMainCard();
   });
   // init stats and pieces layout by publishing this event
-  publish("piecesChanged", myPieces);
+  EventManager.publish("piecesChanged", myPieces);
 
   return { myPieces };
 })();
