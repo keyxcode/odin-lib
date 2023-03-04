@@ -2,6 +2,7 @@ import * as EventManager from "./event-manager.js";
 import * as PiecesStorage from "./pieces-storage.js";
 
 // cache DOM
+const addButton = document.querySelector("#add");
 const formContainer = document.querySelector("#form-container");
 const pieceForm = document.querySelector("#piece-form");
 const formTitle = document.querySelector("#title");

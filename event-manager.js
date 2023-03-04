@@ -8,10 +8,12 @@ export const publish = (event, arg) => {
     callback(arg);
   });
 };
+
 export const subscribe = (event, callback) => {
   events[event] = events[event] === undefined ? [] : events[event];
   events[event].push(callback);
 };
+
 export const unsubscribe = (event, callback) => {
   if (!events[event]) return;
   const callbacks = events[event];
