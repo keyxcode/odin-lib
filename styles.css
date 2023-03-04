@@ -201,6 +201,8 @@ textarea {
 }
 
 .piece-comments {
+  line-height: 2.5ex;
+  height: 7.5ex;
   overflow: hidden;
   word-wrap: break-word;
   display: -webkit-box;
