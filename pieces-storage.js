@@ -1,5 +1,5 @@
-import Piece from "./piece.js";
 import * as EventManager from "./event-manager.js";
+import Piece from "./piece.js";
 
 // Information holder – knows certain information and provides that information
 export const myPieces = [];

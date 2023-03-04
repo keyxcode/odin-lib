@@ -1,4 +1,5 @@
 import * as EventManager from "./event-manager.js";
+
 // Service provider – performs specific work and offers services to others on demand
 // cache DOM
 const cardsContainer = document.querySelector("#cards-container");
@@ -21,6 +22,7 @@ const createCard = (piece) => {
   card.innerHTML = cardHTML;
   return card;
 };
+
 export const render = (pieces) => {
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();

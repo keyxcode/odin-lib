@@ -4,6 +4,7 @@ import * as Stats from "./stats.js";
 import * as Cards from "./cards.js";
 import * as PiecesStorage from "./pieces-storage.js";
 import * as PieceForm from "./piece-form.js";
+import * as SelectedCard from "./selected-card.js";
 
 //= ===================================================================
 // Bind events
@@ -12,6 +13,9 @@ EventManager.subscribe("piecesChanged", (pieces) => {
 });
 EventManager.subscribe("piecesChanged", (pieces) => {
   Cards.render(pieces);
+});
+EventManager.subscribe("editedAPiece", (id) => {
+  SelectedCard.showSelectedCard(id);
 });
 
 // Add demo pieces

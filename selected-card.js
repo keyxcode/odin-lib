@@ -1,6 +1,5 @@
 import * as EventManager from "./event-manager.js";
 import * as PiecesStorage from "./pieces-storage.js";
-import * as PieceForm from "./piece-form.js";
 
 // cache DOM
 const selectedCardContainer = document.querySelector("#main-card-container");
@@ -12,7 +11,7 @@ const selectedCardComments = document.querySelector("#main-card-comments");
 const selectedCardEdit = document.querySelector("#main-card-edit");
 const selectedCardDel = document.querySelector("#main-card-del");
 
-const showSelectedCard = (id) => {
+export const showSelectedCard = (id) => {
   selectedCardContainer.style.display = "flex";
   const pieceToShow = PiecesStorage.myPieces[id];
   selectedCardTitle.innerText = pieceToShow.title;
@@ -57,7 +56,7 @@ selectedCardEdit.addEventListener("click", (e) => {
   const cardID = selectedCardEdit.dataset.id;
   clearSelectedCard();
   hideSelectedCard();
-  PieceForm.showForm(cardID);
+  EventManager.publish("requestEditForm", cardID);
 });
 selectedCardDel.addEventListener("click", (e) => {
   e.preventDefault();

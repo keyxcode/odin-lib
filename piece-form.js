@@ -1,5 +1,5 @@
+import * as EventManager from "./event-manager.js";
 import * as PiecesStorage from "./pieces-storage.js";
-import * as SelectedCard from "./selected-card.js";
 
 // cache DOM
 const formContainer = document.querySelector("#form-container");
@@ -40,6 +40,7 @@ const clearForm = () => {
 };
 
 // bind events
+EventManager.subscribe("requestEditForm", (id) => showForm(id));
 pieceForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const title = formTitle.value;
@@ -52,7 +53,7 @@ pieceForm.addEventListener("submit", (e) => {
   clearForm();
   hideForm();
   // if id exists => is editing a card => show main card after editing
-  if (id) SelectedCard.showSelectedCard(id);
+  EventManager.publish("editedAPiece", id);
 });
 window.addEventListener("click", (e) => {
   if (e.target === formContainer) {
