@@ -59,11 +59,20 @@
       <!--STATS-->
       <div id="stats">
         <button id="add">+</button>
-        <div>
-          <div>Total: <span id="total"></span></div>
-          <div class="finished">Finished: <span id="finished"></span></div>
-          <div class="progress">Learning: <span id="to-learn"></span></div>
-        </div>
+        <table>
+          <tr>
+            <td>Total:</td>
+            <td id="total"></td>
+          </tr>
+          <tr>
+            <td class="finished">Finished:</td>
+            <td class="finished" id="finished"></td>
+          </tr>
+          <tr>
+            <td class="progress">Learning:</td>
+            <td class="progress" id="to-learn"></td>
+          </tr>
+        </table>
       </div>
       <!--PIECES LIST-->
       <div id="empty-message">Press the plus button to add a piece</div>
