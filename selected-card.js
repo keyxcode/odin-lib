@@ -17,12 +17,10 @@ export const showSelectedCard = (id) => {
   selectedCardTitle.innerText = pieceToShow.title;
   selectedCardComposer.innerText = pieceToShow.composer;
   selectedCardPages.innerText = `${pieceToShow.pages} pages`;
-  selectedCardLearnt.innerText = `${pieceToShow.learnt}`
+  selectedCardLearnt.innerText = pieceToShow.learnt
     ? "Finished"
     : "In progress";
-  selectedCardLearnt.classList.add(
-    `${pieceToShow.learnt}` ? "finished" : "progress"
-  );
+  selectedCardLearnt.className = pieceToShow.learnt ? "finished" : "progress";
   selectedCardComments.innerText = pieceToShow.comments;
   selectedCardEdit.dataset.id = id;
   selectedCardDel.dataset.id = id;
