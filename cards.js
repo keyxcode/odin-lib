@@ -1,6 +1,5 @@
 import * as EventManager from "./event-manager.js";
 
-// Service provider – performs specific work and offers services to others on demand
 // cache DOM
 const cardsContainer = document.querySelector("#cards-container");
 
