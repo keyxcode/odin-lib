@@ -2,6 +2,7 @@ import * as EventManager from "./event-manager.js";
 
 // cache DOM
 const cardsContainer = document.querySelector("#cards-container");
+const emptyMessage = document.querySelector("#empty-message");
 
 const createCard = (piece) => {
   const card = document.createElement("div");
@@ -23,6 +24,9 @@ const createCard = (piece) => {
 };
 
 export const render = (pieces) => {
+  if (pieces.length === 0) emptyMessage.style.display = "block";
+  else emptyMessage.style.display = "none";
+
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();
   // this is so that the newest addition is shown first

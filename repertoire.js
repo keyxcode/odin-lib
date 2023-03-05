@@ -86,5 +86,7 @@ export default () => {
   );
 
   // In case there aren't any pieces in storage, this will render the stats
-  if (myPieces.length === 0) EventManager.publish("piecesChanged", myPieces);
+  if (myPieces.length === 0) {
+    EventManager.publish("piecesChanged", myPieces);
+  }
 };

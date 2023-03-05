@@ -85,7 +85,8 @@ footer {
 }
 
 #stats,
-.card {
+.card,
+#empty-message {
   background-color: var(--lightest);
   border-radius: var(--global-radius);
   padding: 20px;
@@ -111,6 +112,10 @@ footer {
   transform: scale(0.8);
   font-size: 32px;
   font-weight: bold;
+}
+
+#empty-message {
+  display: none;
 }
 
 .card {
