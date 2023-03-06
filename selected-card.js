@@ -2,14 +2,16 @@ import * as EventManager from "./event-manager.js";
 import * as PiecesStorage from "./pieces-storage.js";
 
 // cache DOM
-const selectedCardContainer = document.querySelector("#main-card-container");
-const selectedCardTitle = document.querySelector("#main-card-title");
-const selectedCardComposer = document.querySelector("#main-card-composer");
-const selectedCardPages = document.querySelector("#main-card-pages");
-const selectedCardLearnt = document.querySelector("#main-card-learnt");
-const selectedCardComments = document.querySelector("#main-card-comments");
-const selectedCardEdit = document.querySelector("#main-card-edit");
-const selectedCardDel = document.querySelector("#main-card-del");
+const selectedCardContainer = document.querySelector(
+  "#selected-card-container"
+);
+const selectedCardTitle = document.querySelector("#selected-card-title");
+const selectedCardComposer = document.querySelector("#selected-card-composer");
+const selectedCardPages = document.querySelector("#selected-card-pages");
+const selectedCardLearnt = document.querySelector("#selected-card-learnt");
+const selectedCardComments = document.querySelector("#selected-card-comments");
+const selectedCardEdit = document.querySelector("#selected-card-edit");
+const selectedCardDel = document.querySelector("#selected-card-del");
 
 export const showSelectedCard = (id) => {
   selectedCardContainer.style.display = "flex";

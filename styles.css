@@ -103,10 +103,6 @@ footer {
   font-weight: bold;
 }
 
-#stats span {
-  font-weight: normal;
-}
-
 #add {
   width: 75%;
   transform: scale(0.8);
@@ -130,12 +126,12 @@ footer {
 }
 
 .card-title,
-#main-card-title {
+#selected-card-title {
   font-weight: 900;
 }
 
 .card-composer,
-#main-card-composer {
+#selected-card-composer {
   font-style: italic;
 }
 
@@ -144,11 +140,11 @@ footer {
 }
 
 .finished,
-#main-card-finished {
+#selected-card-finished {
   color: green;
 }
 
-#main-card-buttons-row {
+#selected-card-buttons-row {
   padding-top: 20px;
   text-align: right;
 }
@@ -162,7 +158,7 @@ footer {
 }
 
 #form-container,
-#main-card-container {
+#selected-card-container {
   display: none;
   width: 100%;
   height: 100%;
@@ -174,7 +170,7 @@ footer {
 }
 
 #piece-form,
-#main-card {
+#selected-card {
   flex-grow: 0;
   display: grid;
   background-color: var(--lightest);
