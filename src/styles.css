@@ -226,8 +226,7 @@ footer {
 input,
 input:hover,
 input:focus,
-input:active,
-input:invalid {
+input:active {
   background-color: var(--lightest);
   border: none;
   border-bottom: 2px solid var(--dark);
@@ -236,7 +235,17 @@ input:invalid {
 }
 
 input:valid {
-  border-color: green;
+  border-bottom: 2px solid green;
+}
+
+.error {
+  display: none;
+  font-size: 80%;
+}
+
+.error.active {
+  display: block;
+  color: var(--dark);
 }
 
 textarea {

@@ -40,22 +40,52 @@ const clearForm = () => {
   formLearnt.checked = false;
   formID.value = "";
   formComments.value = "";
+  titleError.textContent = "";
+  composerError.textContent = "";
+  pagesError.textContent = "";
 };
 
-const showError = () => {
-  titleError.textContent = formTitle.validity.valueMissing
-    ? "Please enter the piece title."
-    : "";
-  composerError.textContent = formComposer.validity.valueMissing
-    ? "Please enter the piece composer."
-    : "";
-  pagesError.textContent = formPages.validity.valueMissing
-    ? "Please enter the number of pages."
-    : "";
+const showTitleError = () => {
+  if (formTitle.validity.valueMissing) {
+    titleError.textContent = "Please enter the piece title.";
+    titleError.className = "error active";
+  } else {
+    titleError.textContent = "";
+    titleError.className = "error";
+  }
+};
+
+const showComposerError = () => {
+  if (formComposer.validity.valueMissing) {
+    composerError.textContent = "Please enter the piece composer.";
+    composerError.className = "error active";
+  } else {
+    composerError.textContent = "";
+    composerError.className = "error";
+  }
+};
+
+const showPagesError = () => {
+  if (formPages.validity.valueMissing) {
+    pagesError.textContent = "Please enter the number of pages.";
+    pagesError.className = "error active";
+  } else {
+    pagesError.textContent = "";
+    pagesError.className = "error";
+  }
+};
+
+const showErrors = () => {
+  showTitleError();
+  showComposerError();
+  showPagesError();
 };
 
 // bind events
 EventManager.subscribe("requestEditForm", (id) => showForm(id));
+formTitle.addEventListener("input", showTitleError);
+formComposer.addEventListener("input", showComposerError);
+formPages.addEventListener("input", showPagesError);
 pieceForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (
@@ -63,7 +93,7 @@ pieceForm.addEventListener("submit", (e) => {
     !formComposer.validity.valid ||
     !formPages.validity.valid
   ) {
-    showError();
+    showErrors();
     return;
   }
   const title = formTitle.value;
