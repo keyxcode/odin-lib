@@ -124,7 +124,7 @@ footer {
 
 #stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1;
   width: max(30%, 250px);
   justify-items: center;
   gap: 10px;
@@ -220,6 +220,7 @@ footer {
   border-radius: var(--global-radius);
   padding: 50px 25px;
   gap: 10px;
+  width: max(250px, 30%);
 }
 
 input,
@@ -266,6 +267,9 @@ textarea {
   /* For desktop & tablets: */
   #add-desktop {
     display: block;
+  }
+  #stats {
+    grid-template-columns: repeat(2, 1fr);
   }
   #add-mobile {
     display: none;
