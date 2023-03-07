@@ -132,11 +132,23 @@ footer {
   font-weight: bold;
 }
 
-#add {
+#add-desktop {
+  display: none;
   width: 75%;
   transform: scale(0.8);
   font-size: 32px;
   font-weight: bold;
+}
+
+#add-mobile {
+  position: fixed;
+  bottom: 36px;
+  right: 5%;
+  font-size: 32px;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
 }
 
 #empty-message {
@@ -248,4 +260,14 @@ textarea {
 
 #checkbox-container {
   display: flex;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For desktop & tablets: */
+  #add-desktop {
+    display: block;
+  }
+  #add-mobile {
+    display: none;
+  }
 }

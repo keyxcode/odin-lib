@@ -8,12 +8,14 @@ import * as SelectedCard from "./selected-card.js";
 
 export default () => {
   // Cache DOM
-  const addButton = document.querySelector("#add");
+  const addButtons = document.querySelectorAll(".add");
 
   // Bind events
-  addButton.addEventListener("click", () => {
-    PieceForm.showForm();
-  });
+  addButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      PieceForm.showForm();
+    })
+  );
   EventManager.subscribe("piecesChanged", (pieces) => {
     Stats.render(pieces);
     Cards.render(pieces);
