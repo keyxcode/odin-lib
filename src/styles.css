@@ -45,14 +45,6 @@ html {
   overflow-x: hidden;
 }
 
-html {
-  box-sizing: border-box;
-  font-family: "Roboto";
-  color: var(--darkest);
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 button,
 #submit {
   background-color: var(--dark);
@@ -97,39 +89,17 @@ header,
 footer {
   background-color: var(--darkest);
   color: var(--lightest);
+  padding: 20px;
 }
 
 header {
   text-align: left;
   font-size: 24px;
-  padding: 20px;
 }
 
 footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  text-align: center;
   font-size: 16px;
-}
-
-#stats,
-.card,
-#empty-message {
-  background-color: var(--lightest);
-  border-radius: var(--global-radius);
-  padding: 20px;
-  box-shadow: var(--box-shadow-thin);
-}
-
-#stats {
-  display: grid;
-  grid-template-columns: 1;
-  width: max(30%, 250px);
-  justify-items: center;
-  gap: 10px;
-  margin: 50px auto;
-  font-weight: bold;
 }
 
 #add-desktop {
@@ -149,6 +119,31 @@ footer {
   width: 64px;
   border-radius: 50%;
   box-shadow: var(--box-shadow);
+}
+
+#stats,
+.card,
+#empty-message {
+  background-color: var(--lightest);
+  border-radius: var(--global-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow-thin);
+}
+
+#stats {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin: 50px auto;
+  font-weight: bold;
+}
+
+.progress {
+  color: var(--dark);
+}
+
+.finished {
+  color: green;
 }
 
 #empty-message {
@@ -174,15 +169,6 @@ footer {
 .card-composer,
 #selected-card-composer {
   font-style: italic;
-}
-
-.progress {
-  color: var(--dark);
-}
-
-.finished,
-#selected-card-finished {
-  color: green;
 }
 
 #selected-card-buttons-row {
@@ -271,6 +257,22 @@ textarea {
 #checkbox-container {
   display: flex;
 }
+
+/* #tag-container {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+#tag-container > * {
+  background-color: var(--lightest);
+  border-radius: var(--global-radius);
+  padding: 2px;
+  box-shadow: var(--box-shadow-thin);
+  width: fit-content;
+} */
 
 @media only screen and (min-width: 600px) {
   /* For desktop & tablets: */
