@@ -5,8 +5,11 @@ import * as PiecesStorage from "./pieces-storage.js";
 const formContainer = document.querySelector("#form-container");
 const pieceForm = document.querySelector("#piece-form");
 const formTitle = document.querySelector("#title");
+const titleError = document.querySelector("#title + span");
 const formComposer = document.querySelector("#composer");
+const composerError = document.querySelector("#composer + span");
 const formPages = document.querySelector("#pages");
+const pagesError = document.querySelector("#pages + span");
 const formLearnt = document.querySelector("#learnt");
 const formComments = document.querySelector("#comments");
 // form-id is a hidden value, always empty unless showForm() has an id passed in
@@ -39,10 +42,30 @@ const clearForm = () => {
   formComments.value = "";
 };
 
+const showError = () => {
+  titleError.textContent = formTitle.validity.valueMissing
+    ? "Please enter the piece title."
+    : "";
+  composerError.textContent = formComposer.validity.valueMissing
+    ? "Please enter the piece composer."
+    : "";
+  pagesError.textContent = formPages.validity.valueMissing
+    ? "Please enter the number of pages."
+    : "";
+};
+
 // bind events
 EventManager.subscribe("requestEditForm", (id) => showForm(id));
 pieceForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (
+    !formTitle.validity.valid ||
+    !formComposer.validity.valid ||
+    !formPages.validity.valid
+  ) {
+    showError();
+    return;
+  }
   const title = formTitle.value;
   const composer = formComposer.value;
   const pages = formPages.value;

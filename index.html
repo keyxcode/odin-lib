@@ -29,27 +29,18 @@
     <header>My Repertoire</header>
     <!--PIECE FORM-->
     <div id="form-container">
-      <form id="piece-form">
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          required
-          minlength="5"
-        />
-        <input
-          type="text"
-          id="composer"
-          placeholder="Composer"
-          required
-          minlength="5"
-        />
+      <form id="piece-form" novalidate>
+        <input type="text" id="title" placeholder="Title" required />
+        <span class="error" aria-live="polite"></span>
+        <input type="text" id="composer" placeholder="Composer" required />
+        <span class="error" aria-live="polite"></span>
         <input
           type="number"
           id="pages"
           placeholder="Number of pages"
           required
         />
+        <span class="error" aria-live="polite"></span>
         <div id="checkbox-container">
           <label for="checkbox">Finished</label>
           <input type="checkbox" id="learnt" />
