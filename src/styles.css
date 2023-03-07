@@ -16,9 +16,38 @@
   --lightest: #ffffff; */
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("./Roboto/Roboto-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./Roboto/Roboto-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./Roboto/Roboto-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
 html {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto";
+  color: var(--darkest);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Roboto";
   color: var(--darkest);
   max-width: 100%;
   overflow-x: hidden;
@@ -127,7 +156,7 @@ footer {
 
 .card-title,
 #selected-card-title {
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .card-composer,
@@ -196,7 +225,7 @@ textarea {
   background-color: var(--lightest);
   border: 2px solid var(--dark);
   outline: none;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto";
   font-size: 16px;
   resize: vertical;
 }
