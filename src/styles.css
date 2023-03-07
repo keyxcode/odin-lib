@@ -45,6 +45,12 @@ html {
   overflow-x: hidden;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 button,
 #submit {
   background-color: var(--dark);
@@ -134,7 +140,7 @@ footer {
   display: grid;
   justify-items: center;
   gap: 10px;
-  margin: 50px auto;
+  margin: 50px auto 20px;
   font-weight: bold;
 }
 
@@ -258,21 +264,19 @@ textarea {
   display: flex;
 }
 
-/* #tag-container {
+#tag-container {
   width: 80%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
-  margin-bottom: 20px;
+  display: flex;
   gap: 10px;
-}
-
-#tag-container > * {
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
   background-color: var(--lightest);
   border-radius: var(--global-radius);
-  padding: 2px;
+  padding: 10px;
   box-shadow: var(--box-shadow-thin);
-  width: fit-content;
-} */
+}
 
 @media only screen and (min-width: 600px) {
   /* For desktop & tablets: */
@@ -281,6 +285,9 @@ textarea {
   }
   #stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+  #tag-container {
+    width: 50%;
   }
   #add-mobile {
     display: none;
