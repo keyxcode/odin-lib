@@ -1,5 +1,4 @@
 import * as EventManager from "./event-manager.js";
-import { myPieces } from "./pieces-storage.js";
 
 const initTags = () => {
   const tags = new Set();

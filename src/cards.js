@@ -23,7 +23,7 @@ const createCard = (piece) => {
   return card;
 };
 
-const cardHasSelectedTags = (cardTags, selectedTags) =>
+const pieceHasSelectedTags = (cardTags, selectedTags) =>
   Array.from(selectedTags).every((selectedTag) =>
     cardTags.includes(selectedTag)
   );
@@ -39,16 +39,14 @@ export const render = (pieces, selectedTags = new Set()) => {
   const reversedPieces = pieces.slice().reverse();
   let i = reversedPieces.length - 1;
   reversedPieces.forEach((piece) => {
-    // check card tags
-
-    const tags = piece.tags.split(",").map((item) => item.trim());
-    if (cardHasSelectedTags(tags, selectedTags) || selectedTags.size === 0) {
-      // card div
+    // render piece to card if has all seletected tags
+    const pieceTags = piece.tags.split(",").map((item) => item.trim());
+    if (
+      pieceHasSelectedTags(pieceTags, selectedTags) ||
+      selectedTags.size === 0
+    ) {
       const card = createCard(piece);
       card.classList.add("card");
-      tags.forEach((tag) => {
-        card.classList.add(tag);
-      });
       card.dataset.id = i;
       cardsContainer.appendChild(card);
     }
