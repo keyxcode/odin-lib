@@ -65,5 +65,4 @@ const getTagsFromPieces = (pieces) => {
 EventManager.subscribe("piecesChanged", (pieces) => {
   getTagsFromPieces(pieces);
   render();
-  console.log("hi");
 });

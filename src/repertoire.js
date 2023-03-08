@@ -86,7 +86,6 @@ export default () => {
   });
   clearAll.addEventListener("click", PiecesStorage.clearAll);
   EventManager.subscribe("piecesChanged", (pieces) => {
-    Stats.render(pieces);
     Cards.render(pieces);
     Tags.render(pieces);
     console.log(

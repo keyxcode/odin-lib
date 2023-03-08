@@ -48,6 +48,7 @@ export const render = (pieces, selectedTags = new Set()) => {
       const card = createCardHTML(piece);
       card.classList.add("card");
       card.dataset.id = i;
+      card.dataset.finished = piece.learnt;
       cardsContainer.appendChild(card);
     }
     i -= 1;

@@ -1,18 +1,28 @@
+import * as EventManager from "./event-manager.js";
+
 // cache DOM
 const total = document.querySelector("#total");
 const finished = document.querySelector("#finished");
 const toLearn = document.querySelector("#to-learn");
 
-const parsePiecesStats = (pieces) => {
-  const numTotal = pieces.length ? pieces.length : 0;
-  const numFinished = pieces.filter((piece) => piece.learnt === true).length;
+const parsePiecesStats = (cards) => {
+  const numTotal = cards.length;
+  const numFinished = Array.from(cards).filter(
+    (card) => card.dataset.finished === "true"
+  ).length;
   const numToLearn = numTotal - numFinished;
   return { numTotal, numFinished, numToLearn };
 };
 
-export const render = (pieces) => {
-  const stats = parsePiecesStats(pieces);
+export const render = (cards) => {
+  const stats = parsePiecesStats(cards);
+  console.log(`hi ${stats.numTotal}`);
   total.innerText = stats.numTotal;
   finished.innerText = stats.numFinished;
   toLearn.innerText = stats.numToLearn;
 };
+
+// bind events
+EventManager.subscribe("cardsChanged", (cards) => {
+  render(cards);
+});
