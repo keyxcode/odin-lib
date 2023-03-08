@@ -1,5 +1,8 @@
+import * as EventManager from "./event-manager.js";
+
 const initTags = () => {
-  const tags = ["Classical", "Romantic", "Jazz", "20th century", "Baroque"];
+  const tags = ["jazz", "waltz", "romantic"];
+  const selectedTags = new Set();
 
   // cache DOM
   const tagsContainer = document.querySelector("#tag-container");
@@ -18,12 +21,15 @@ const initTags = () => {
 
   const selectOrUnselectTag = (e) => {
     const tagDiv = e.target;
+    const tag = e.target.innerText;
     if (tagDiv.className === "tag selected") {
       tagDiv.className = "tag";
       tagDiv.style.filter = "brightness(100%)";
+      selectedTags.delete(tag);
     } else {
       tagDiv.className = "tag selected";
       tagDiv.style.filter = "brightness(60%)";
+      selectedTags.add(tag);
     }
   };
 
@@ -31,6 +37,7 @@ const initTags = () => {
   tagDivs.forEach((tagDiv) =>
     tagDiv.addEventListener("click", (e) => {
       selectOrUnselectTag(e);
+      EventManager.publish("tagsSelected", selectedTags);
     })
   );
 

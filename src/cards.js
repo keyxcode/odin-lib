@@ -18,26 +18,40 @@ const createCard = (piece) => {
   }</div>
     </div>
     <div class="card-comments">${piece.comments}</div>
-    <div class="card-tags"></div>
         `;
   card.innerHTML = cardHTML;
   return card;
 };
 
-export const render = (pieces) => {
+const cardHasSelectedTags = (cardTags, selectedTags) =>
+  Array.from(selectedTags).every((selectedTag) =>
+    cardTags.includes(selectedTag)
+  );
+
+export const render = (pieces, selectedTags = new Set()) => {
+  // Empty message
   if (pieces.length === 0) emptyMessage.style.display = "block";
   else emptyMessage.style.display = "none";
 
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();
-  // this is so that the newest addition is shown first
+  // newest addition is shown first
   const reversedPieces = pieces.slice().reverse();
   let i = reversedPieces.length - 1;
   reversedPieces.forEach((piece) => {
-    const card = createCard(piece);
-    card.classList.add("card");
-    card.dataset.id = i;
-    cardsContainer.appendChild(card);
+    // check card tags
+
+    const tags = piece.tags.split(",").map((item) => item.trim());
+    if (cardHasSelectedTags(tags, selectedTags) || selectedTags.size === 0) {
+      // card div
+      const card = createCard(piece);
+      card.classList.add("card");
+      tags.forEach((tag) => {
+        card.classList.add(tag);
+      });
+      card.dataset.id = i;
+      cardsContainer.appendChild(card);
+    }
     i -= 1;
   });
 

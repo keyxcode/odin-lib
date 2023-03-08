@@ -31,6 +31,9 @@ export default () => {
       "repertoire receives editedAPiece: show the selected card of the piece just being edited"
     );
   });
+  EventManager.subscribe("tagsSelected", (selectedTags) => {
+    Cards.render(PiecesStorage.myPieces, selectedTags);
+  });
 
   // Add demo pieces
   let myPieces = [];
@@ -69,7 +72,7 @@ export default () => {
         4,
         true,
         "Listen to Baremboim's version",
-        "early romantic"
+        "romantic"
       ),
       Piece(
         "Clair de lune ",
@@ -77,7 +80,7 @@ export default () => {
         6,
         true,
         "Make use of half-pedalling\nListen to the original poem by Paul Verlaine for inspiration",
-        "impressionism, late romantic"
+        "impressionism, romantic"
       ),
       Piece(
         "Salut d'Amour Op.12",
@@ -95,8 +98,9 @@ export default () => {
       piece.composer,
       piece.pages,
       piece.learnt,
-      undefined,
-      piece.comments
+      undefined, // undefined id so that it doesn't call up an edit form
+      piece.comments,
+      piece.tags
     )
   );
 
