@@ -5,6 +5,7 @@ import * as Cards from "./cards.js";
 import * as PiecesStorage from "./pieces-storage.js";
 import * as PieceForm from "./piece-form.js";
 import * as SelectedCard from "./selected-card.js";
+import * as Tags from "./tags.js";
 
 export default () => {
   // cache DOM
@@ -85,6 +86,7 @@ export default () => {
   EventManager.subscribe("piecesChanged", (pieces) => {
     Stats.render(pieces);
     Cards.render(pieces);
+    Tags.render(pieces);
     console.log(
       "repertoire receives piecesChanged: render stats, render cards"
     );
