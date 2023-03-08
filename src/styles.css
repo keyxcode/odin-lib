@@ -278,6 +278,11 @@ textarea {
   box-shadow: var(--box-shadow-thin);
 }
 
+#tag-container > * {
+  font-size: 80%;
+  box-shadow: none;
+}
+
 @media only screen and (min-width: 600px) {
   /* For desktop & tablets: */
   #add-desktop {

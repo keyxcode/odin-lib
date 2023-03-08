@@ -20,9 +20,15 @@ export default () => {
     Stats.render(pieces);
     Cards.render(pieces);
     localStorage.setItem("myPieces", JSON.stringify(pieces));
+    console.log(
+      "repertoire receives piecesChanged: render stats, render cards, update localStorage"
+    );
   });
   EventManager.subscribe("editedAPiece", (id) => {
     SelectedCard.showSelectedCard(id);
+    console.log(
+      "repertoire receives editedAPiece: show the selected card of the piece just being edited"
+    );
   });
 
   // Add demo pieces

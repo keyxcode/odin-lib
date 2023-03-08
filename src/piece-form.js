@@ -82,7 +82,10 @@ const showErrors = () => {
 };
 
 // bind events
-EventManager.subscribe("requestEditForm", (id) => showForm(id));
+EventManager.subscribe("requestEditForm", (id) => {
+  showForm(id);
+  console.log("piece-form receives requestEditForm: show the requested form");
+});
 formTitle.addEventListener("input", showTitleError);
 formComposer.addEventListener("input", showComposerError);
 formPages.addEventListener("input", showPagesError);

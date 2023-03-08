@@ -50,6 +50,9 @@ EventManager.subscribe("cardsChanged", (changedCards) => {
       showSelectedCard(pieceID);
     })
   );
+  console.log(
+    "selected-card receives cardsChanged: update cards, rebind showSelectedCard callback for each card"
+  );
 });
 selectedCardEdit.addEventListener("click", (e) => {
   e.preventDefault();
