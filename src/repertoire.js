@@ -12,7 +12,7 @@ export default () => {
   const addButtons = document.querySelectorAll(".add"); // many because desktop & mobile
   const addDemo = document.querySelector("#add-demo");
 
-  // Demo pieces
+  // demo pieces
   const demoPieces = [
     Piece(
       "Waltz for Debby",
@@ -77,7 +77,7 @@ export default () => {
         demoPiece.composer,
         demoPiece.pages,
         demoPiece.learnt,
-        undefined, // undefined id so that it doesn't call up an edit form
+        undefined, // undefined id so that it won't call up an edit form
         demoPiece.comments,
         demoPiece.tags
       );
@@ -91,10 +91,10 @@ export default () => {
       "repertoire receives piecesChanged: render stats, render cards"
     );
   });
-  EventManager.subscribe("editedAPiece", (id) => {
+  EventManager.subscribe("pieceEdited", (id) => {
     SelectedCard.showSelectedCard(id);
     console.log(
-      "repertoire receives editedAPiece: show the selected card of the piece just being edited"
+      "repertoire receives pieceEdited: show the selected card of the piece just being edited"
     );
   });
   EventManager.subscribe("tagsSelected", (selectedTags) => {
@@ -102,6 +102,6 @@ export default () => {
   });
 
   // init
-  PiecesStorage.syncWithLocalStorage();
+  PiecesStorage.getPiecesFromLocalStorage();
   EventManager.publish("piecesChanged", PiecesStorage.myPieces);
 };

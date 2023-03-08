@@ -3,7 +3,7 @@ import Piece from "./piece.js";
 
 export const myPieces = [];
 
-export const syncWithLocalStorage = () => {
+export const getPiecesFromLocalStorage = () => {
   if (localStorage.getItem("myPieces")) {
     const localPieces = JSON.parse(localStorage.getItem("myPieces"));
     localPieces.forEach((localPiece) => myPieces.push(localPiece));

@@ -85,9 +85,9 @@ const showErrors = () => {
 };
 
 // bind events
-EventManager.subscribe("requestEditForm", (id) => {
+EventManager.subscribe("editFormRequested", (id) => {
   showForm(id);
-  console.log("piece-form receives requestEditForm: show the requested form");
+  console.log("piece-form receives editFormRequested: show the requested form");
 });
 formTitle.addEventListener("input", showTitleError);
 formComposer.addEventListener("input", showComposerError);
@@ -121,7 +121,7 @@ pieceForm.addEventListener("submit", (e) => {
   clearForm();
   hideForm();
   // if id exists => is editing a card => show main card after editing
-  if (id) EventManager.publish("editedAPiece", id);
+  if (id) EventManager.publish("pieceEdited", id);
 });
 window.addEventListener("click", (e) => {
   if (e.target === formContainer) {

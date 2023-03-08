@@ -63,7 +63,7 @@ selectedCardEdit.addEventListener("click", (e) => {
   const cardID = selectedCardEdit.dataset.id;
   clearSelectedCard();
   hideSelectedCard();
-  EventManager.publish("requestEditForm", cardID);
+  EventManager.publish("editFormRequested", cardID);
 });
 selectedCardDel.addEventListener("click", (e) => {
   e.preventDefault();
