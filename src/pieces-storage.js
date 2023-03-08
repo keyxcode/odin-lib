@@ -10,6 +10,10 @@ export const getPiecesFromLocalStorage = () => {
   }
 };
 
+const savePiecesToLocalStorage = () => {
+  localStorage.setItem("myPieces", JSON.stringify(myPieces));
+};
+
 export const addOrEditPiece = (
   title,
   composer,
@@ -26,11 +30,18 @@ export const addOrEditPiece = (
   } else {
     myPieces.push(piece);
   }
-  localStorage.setItem("myPieces", JSON.stringify(myPieces));
+  savePiecesToLocalStorage();
   EventManager.publish("piecesChanged", myPieces);
 };
 
 export const deletePiece = (id) => {
   myPieces.splice(id, 1);
+  savePiecesToLocalStorage();
+  EventManager.publish("piecesChanged", myPieces);
+};
+
+export const clearAll = () => {
+  myPieces.splice(0, myPieces.length);
+  savePiecesToLocalStorage();
   EventManager.publish("piecesChanged", myPieces);
 };

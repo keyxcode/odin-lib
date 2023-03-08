@@ -11,6 +11,7 @@ export default () => {
   // cache DOM
   const addButtons = document.querySelectorAll(".add"); // many because desktop & mobile
   const addDemo = document.querySelector("#add-demo");
+  const clearAll = document.querySelector("#clear-all");
 
   // demo pieces
   const demoPieces = [
@@ -83,6 +84,7 @@ export default () => {
       );
     });
   });
+  clearAll.addEventListener("click", PiecesStorage.clearAll);
   EventManager.subscribe("piecesChanged", (pieces) => {
     Stats.render(pieces);
     Cards.render(pieces);
