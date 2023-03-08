@@ -101,7 +101,8 @@ footer {
 }
 
 header {
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
   font-size: 24px;
 }
 

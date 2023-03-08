@@ -3,6 +3,13 @@ import Piece from "./piece.js";
 
 export const myPieces = [];
 
+export const syncWithLocalStorage = () => {
+  if (localStorage.getItem("myPieces")) {
+    const localPieces = JSON.parse(localStorage.getItem("myPieces"));
+    localPieces.forEach((localPiece) => myPieces.push(localPiece));
+  }
+};
+
 export const addOrEditPiece = (
   title,
   composer,
@@ -19,6 +26,7 @@ export const addOrEditPiece = (
   } else {
     myPieces.push(piece);
   }
+  localStorage.setItem("myPieces", JSON.stringify(myPieces));
   EventManager.publish("piecesChanged", myPieces);
 };
 
