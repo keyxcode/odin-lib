@@ -1,23 +1,12 @@
 import * as EventManager from "./event-manager.js";
+import { myPieces } from "./pieces-storage.js";
 
 const initTags = () => {
-  const tags = ["jazz", "waltz", "romantic"];
+  const tags = new Set();
   const selectedTags = new Set();
 
   // cache DOM
   const tagsContainer = document.querySelector("#tag-container");
-
-  const render = () => {
-    tags.forEach((tag) => {
-      const tagDiv = document.createElement("div");
-      tagDiv.textContent = tag;
-      tagDiv.className = "tag";
-      tagsContainer.appendChild(tagDiv);
-    });
-  };
-  render();
-
-  const tagDivs = document.querySelectorAll(".tag");
 
   const selectOrUnselectTag = (e) => {
     const tagDiv = e.target;
@@ -33,15 +22,41 @@ const initTags = () => {
     }
   };
 
-  // bind events
-  tagDivs.forEach((tagDiv) =>
-    tagDiv.addEventListener("click", (e) => {
-      selectOrUnselectTag(e);
-      EventManager.publish("tagsSelected", selectedTags);
-    })
-  );
+  const render = () => {
+    tagsContainer.replaceChildren();
+    tags.forEach((tag) => {
+      const tagDiv = document.createElement("div");
+      tagDiv.textContent = tag;
+      tagDiv.className = "tag";
+      tagsContainer.appendChild(tagDiv);
+    });
 
-  return { render };
+    // recache DOM
+    const tagDivs = document.querySelectorAll(".tag");
+
+    // rebind events
+    tagDivs.forEach((tagDiv) =>
+      tagDiv.addEventListener("click", (e) => {
+        selectOrUnselectTag(e);
+        EventManager.publish("tagsSelected", selectedTags);
+      })
+    );
+  };
+  render();
+
+  const parseTagsFromPieces = (pieces) => {
+    const tagLists = Array.from(pieces).map((piece) => piece.tags);
+    tagLists.forEach((tagList) => {
+      const pieceTags = tagList.split(",").map((item) => item.trim());
+      pieceTags.forEach((pieceTag) => tags.add(pieceTag));
+    });
+  };
+
+  // bind events
+  EventManager.subscribe("piecesChanged", (pieces) => {
+    parseTagsFromPieces(pieces);
+    render();
+  });
 };
 
 export default initTags();
