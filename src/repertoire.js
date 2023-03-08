@@ -5,6 +5,7 @@ import * as Cards from "./cards.js";
 import * as PiecesStorage from "./pieces-storage.js";
 import * as PieceForm from "./piece-form.js";
 import * as SelectedCard from "./selected-card.js";
+import Tags from "./tags.js";
 
 export default () => {
   // Cache DOM

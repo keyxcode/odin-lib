@@ -52,7 +52,8 @@ html {
 }
 
 button,
-#submit {
+#submit,
+.tag {
   background-color: var(--dark);
   border: 1px solid var(--dark);
   color: var(--lightest);
@@ -62,7 +63,8 @@ button,
 }
 
 button:hover,
-#submit:hover {
+#submit:hover,
+.tag:hover {
   cursor: pointer;
   filter: brightness(95%);
   color: var(--lightest);
@@ -278,9 +280,12 @@ textarea {
   box-shadow: var(--box-shadow-thin);
 }
 
-#tag-container > * {
+.tag {
   font-size: 80%;
   box-shadow: none;
+}
+
+.tag.selected {
 }
 
 @media only screen and (min-width: 600px) {
