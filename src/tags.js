@@ -43,17 +43,24 @@ const initTags = () => {
   };
   render();
 
-  const parseTagsFromPieces = (pieces) => {
+  const getTagsFromPieces = (pieces) => {
     const tagLists = Array.from(pieces).map((piece) => piece.tags);
+    const sortedTags = [];
     tagLists.forEach((tagList) => {
       const pieceTags = tagList.split(",").map((item) => item.trim());
-      pieceTags.forEach((pieceTag) => tags.add(pieceTag));
+      pieceTags.forEach((pieceTag) => {
+        if (pieceTag === "") return;
+        const pieceTagLowerCase = pieceTag.toLowerCase();
+        sortedTags.push(pieceTagLowerCase);
+      });
     });
+    tags.clear();
+    sortedTags.sort().forEach((sortedTag) => tags.add(sortedTag));
   };
 
   // bind events
   EventManager.subscribe("piecesChanged", (pieces) => {
-    parseTagsFromPieces(pieces);
+    getTagsFromPieces(pieces);
     render();
   });
 };

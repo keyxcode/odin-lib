@@ -4,7 +4,7 @@ import * as EventManager from "./event-manager.js";
 const cardsContainer = document.querySelector("#cards-container");
 const emptyMessage = document.querySelector("#empty-message");
 
-const createCard = (piece) => {
+const createCardHTML = (piece) => {
   const card = document.createElement("div");
   const cardHTML = `
     <div>
@@ -35,17 +35,17 @@ export const render = (pieces, selectedTags = new Set()) => {
 
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();
+
   // newest addition is shown first
   const reversedPieces = pieces.slice().reverse();
   let i = reversedPieces.length - 1;
   reversedPieces.forEach((piece) => {
-    // render piece to card if has all seletected tags
     const pieceTags = piece.tags.split(",").map((item) => item.trim());
     if (
       pieceHasSelectedTags(pieceTags, selectedTags) ||
       selectedTags.size === 0
     ) {
-      const card = createCard(piece);
+      const card = createCardHTML(piece);
       card.classList.add("card");
       card.dataset.id = i;
       cardsContainer.appendChild(card);
