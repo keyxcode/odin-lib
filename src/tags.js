@@ -1,6 +1,19 @@
 const initTags = () => {
+  const tags = ["Classical", "Romantic", "Jazz", "20th century", "Baroque"];
+
   // cache DOM
-  const tags = document.querySelectorAll(".tag");
+  const tagsContainer = document.querySelector("#tag-container");
+  const tagDivs = document.querySelectorAll(".tag");
+
+  const render = () => {
+    tags.forEach((tag) => {
+      const tagDiv = document.createElement("div");
+      tagDiv.textContent = tag;
+      tagDiv.className = "tag";
+      tagsContainer.appendChild(tagDiv);
+    });
+  };
+  render();
 
   const selectOrUnselectTag = (e) => {
     const button = e.target;
@@ -14,8 +27,8 @@ const initTags = () => {
   };
 
   // bind events
-  tags.forEach((tag) =>
-    tag.addEventListener("click", (e) => {
+  tagDivs.forEach((tagDiv) =>
+    tagDiv.addEventListener("click", (e) => {
       selectOrUnselectTag(e);
     })
   );
