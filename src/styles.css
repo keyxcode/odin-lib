@@ -71,6 +71,10 @@ button:hover,
   box-shadow: var(--box-shadow);
 }
 
+.tag:hover {
+  box-shadow: none;
+}
+
 button:active,
 #submit:active {
   filter: brightness(85%);
@@ -145,6 +149,7 @@ footer {
   gap: 10px;
   margin: 50px auto 20px;
   font-weight: bold;
+  width: 80%;
 }
 
 .progress {
@@ -221,6 +226,7 @@ footer {
   padding: 50px 25px;
   gap: 10px;
   width: max(250px, 30%);
+  justify-content: center;
 }
 
 input,
@@ -303,6 +309,7 @@ textarea {
   }
   #stats {
     grid-template-columns: repeat(2, 1fr);
+    width: max(250px, 30%);
   }
   #tag-container {
     width: 50%;
