@@ -179,6 +179,11 @@ footer {
   font-style: italic;
 }
 
+.card-tags,
+#selected-card-tags {
+  font-size: 80%;
+}
+
 #selected-card-buttons-row {
   padding-top: 20px;
   text-align: right;
@@ -256,7 +261,7 @@ textarea {
   resize: vertical;
 }
 
-.piece-comments {
+.card-comments {
   line-height: 2.5ex;
   height: 7.5ex;
   overflow: hidden;

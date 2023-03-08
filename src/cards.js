@@ -17,7 +17,8 @@ const createCard = (piece) => {
     piece.learnt ? `Finished` : `In progress`
   }</div>
     </div>
-    <div class="piece-comments">${piece.comments}</div>
+    <div class="card-comments">${piece.comments}</div>
+    <div class="card-tags"></div>
         `;
   card.innerHTML = cardHTML;
   return card;

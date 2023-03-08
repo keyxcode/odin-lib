@@ -10,6 +10,7 @@ const selectedCardComposer = document.querySelector("#selected-card-composer");
 const selectedCardPages = document.querySelector("#selected-card-pages");
 const selectedCardLearnt = document.querySelector("#selected-card-learnt");
 const selectedCardComments = document.querySelector("#selected-card-comments");
+const selectedCardTags = document.querySelector("#selected-card-tags");
 const selectedCardEdit = document.querySelector("#selected-card-edit");
 const selectedCardDel = document.querySelector("#selected-card-del");
 
@@ -24,6 +25,9 @@ export const showSelectedCard = (id) => {
     : "In progress";
   selectedCardLearnt.className = pieceToShow.learnt ? "finished" : "progress";
   selectedCardComments.innerText = pieceToShow.comments;
+  selectedCardTags.innerText = pieceToShow.tags
+    ? `Tags: ${pieceToShow.tags}`
+    : "";
   selectedCardEdit.dataset.id = id;
   selectedCardDel.dataset.id = id;
 };
