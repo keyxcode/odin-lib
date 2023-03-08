@@ -12,6 +12,7 @@ const formPages = document.querySelector("#pages");
 const pagesError = document.querySelector("#pages + span");
 const formLearnt = document.querySelector("#learnt");
 const formComments = document.querySelector("#comments");
+const formTags = document.querySelector("#form-tags");
 // form-id is a hidden value, always empty unless showForm() has an id passed in
 const formID = document.querySelector("#form-id");
 
@@ -26,6 +27,7 @@ export const showForm = (id) => {
     formLearnt.checked = pieceToEdit.learnt;
     formID.value = id;
     formComments.value = pieceToEdit.comments;
+    formTags.value = pieceToEdit.tags;
   }
 };
 
@@ -40,6 +42,7 @@ const clearForm = () => {
   formLearnt.checked = false;
   formID.value = "";
   formComments.value = "";
+  formTags.value = "";
   titleError.textContent = "";
   composerError.textContent = "";
   pagesError.textContent = "";
@@ -105,7 +108,16 @@ pieceForm.addEventListener("submit", (e) => {
   const learnt = formLearnt.checked;
   const id = formID.value;
   const comments = formComments.value;
-  PiecesStorage.addOrEditPiece(title, composer, pages, learnt, id, comments);
+  const tags = formTags.value;
+  PiecesStorage.addOrEditPiece(
+    title,
+    composer,
+    pages,
+    learnt,
+    id,
+    comments,
+    tags
+  );
   clearForm();
   hideForm();
   // if id exists => is editing a card => show main card after editing
