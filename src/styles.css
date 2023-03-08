@@ -232,6 +232,11 @@ input:valid {
   border-bottom: 2px solid green;
 }
 
+input:valid,
+#form-tag {
+  border-bottom: 2px solid var(--dark);
+}
+
 .error {
   display: none;
   font-size: 80%;

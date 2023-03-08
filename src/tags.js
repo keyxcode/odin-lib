@@ -3,7 +3,6 @@ const initTags = () => {
 
   // cache DOM
   const tagsContainer = document.querySelector("#tag-container");
-  const tagDivs = document.querySelectorAll(".tag");
 
   const render = () => {
     tags.forEach((tag) => {
@@ -15,14 +14,16 @@ const initTags = () => {
   };
   render();
 
+  const tagDivs = document.querySelectorAll(".tag");
+
   const selectOrUnselectTag = (e) => {
-    const button = e.target;
-    if (button.className === "tag selected") {
-      button.className = "tag";
-      button.style.filter = "brightness(100%)";
+    const tagDiv = e.target;
+    if (tagDiv.className === "tag selected") {
+      tagDiv.className = "tag";
+      tagDiv.style.filter = "brightness(100%)";
     } else {
-      button.className = "tag selected";
-      button.style.filter = "brightness(60%)";
+      tagDiv.className = "tag selected";
+      tagDiv.style.filter = "brightness(60%)";
     }
   };
 
@@ -32,6 +33,8 @@ const initTags = () => {
       selectOrUnselectTag(e);
     })
   );
+
+  return { render };
 };
 
 export default initTags();

@@ -9,9 +9,10 @@ export const addOrEditPiece = (
   pages,
   learnt,
   id,
-  comments
+  comments,
+  tags
 ) => {
-  const piece = Piece(title, composer, pages, learnt, comments);
+  const piece = Piece(title, composer, pages, learnt, comments, tags);
   if (id) {
     // update the existing piece with new values
     myPieces[id] = piece;
