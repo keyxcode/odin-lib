@@ -16,7 +16,6 @@ const parsePiecesStats = (cards) => {
 
 export const render = (cards) => {
   const stats = parsePiecesStats(cards);
-  console.log(`hi ${stats.numTotal}`);
   total.innerText = stats.numTotal;
   finished.innerText = stats.numFinished;
   toLearn.innerText = stats.numToLearn;

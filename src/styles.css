@@ -304,6 +304,9 @@ textarea {
 
 @media only screen and (min-width: 600px) {
   /* For desktop & tablets: */
+  body {
+    overflow-y: scroll; /* Always show vertical scroll for consistency */
+  }
   #add-desktop {
     display: block;
   }
@@ -316,5 +319,8 @@ textarea {
   }
   #add-mobile {
     display: none;
+  }
+  #piece-form {
+    justify-content: stretch;
   }
 }

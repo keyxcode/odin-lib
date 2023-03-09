@@ -23,10 +23,13 @@ const createCardHTML = (piece) => {
   return card;
 };
 
-const pieceHasSelectedTags = (cardTags, selectedTags) =>
-  Array.from(selectedTags).every((selectedTag) =>
-    cardTags.includes(selectedTag)
+const pieceHasSelectedTags = (cardTags, selectedTags) => {
+  const cardTagsLowerCase = cardTags.map((cardTag) => cardTag.toLowerCase());
+  console.log(cardTagsLowerCase);
+  return Array.from(selectedTags).every((selectedTag) =>
+    cardTagsLowerCase.includes(selectedTag)
   );
+};
 
 export const render = (pieces, selectedTags = new Set()) => {
   // Empty message
