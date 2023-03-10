@@ -88,9 +88,7 @@ export default () => {
   EventManager.subscribe("piecesChanged", (pieces) => {
     Cards.render(pieces);
     Tags.render(pieces);
-    console.log(
-      "repertoire receives piecesChanged: render stats, render cards"
-    );
+    console.log("repertoire receives piecesChanged: render cards, render tags");
   });
   EventManager.subscribe("pieceEdited", (id) => {
     SelectedCard.showSelectedCard(id);
@@ -100,6 +98,20 @@ export default () => {
   });
   EventManager.subscribe("tagsSelected", (selectedTags) => {
     Cards.render(PiecesStorage.myPieces, selectedTags);
+  });
+
+  const tagsDropDown = document.querySelector("#tags-hider .dropdown");
+  const tagsContainer = document.querySelector("#tag-container");
+
+  tagsDropDown.addEventListener("click", () => {
+    tagsDropDown.classList.toggle("active");
+    if (tagsContainer.classList.contains("hide-tags")) {
+      tagsContainer.classList.remove("hide-tags");
+      tagsContainer.classList.add("show-tags");
+    } else {
+      tagsContainer.classList.remove("show-tags");
+      tagsContainer.classList.add("hide-tags");
+    }
   });
 
   // init
