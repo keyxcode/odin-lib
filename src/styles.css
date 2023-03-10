@@ -136,7 +136,7 @@ footer {
 
 #stats,
 .card,
-#empty-message {
+#feedback-message {
   background-color: var(--lightest);
   border-radius: var(--global-radius);
   padding: 20px;
@@ -160,7 +160,7 @@ footer {
   color: green;
 }
 
-#empty-message {
+#feedback-message {
   display: none;
 }
 

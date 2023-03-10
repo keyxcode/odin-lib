@@ -2,7 +2,7 @@ import * as EventManager from "./event-manager.js";
 
 // cache DOM
 const cardsContainer = document.querySelector("#cards-container");
-const emptyMessage = document.querySelector("#empty-message");
+const feedbackMessage = document.querySelector("#feedback-message");
 
 const createCardHTML = (piece) => {
   const card = document.createElement("div");
@@ -31,10 +31,16 @@ const pieceHasSelectedTags = (cardTags, selectedTags) => {
   );
 };
 
+const updateFeedbackMessage = (message = "") => {
+  feedbackMessage.style.display = message ? "block" : "none";
+  feedbackMessage.textContent = message;
+};
+
 export const render = (pieces, selectedTags = new Set()) => {
   // Empty message
-  if (pieces.length === 0) emptyMessage.style.display = "block";
-  else emptyMessage.style.display = "none";
+  if (pieces.length === 0) {
+    updateFeedbackMessage("Press the plus button to add a piece");
+  } else updateFeedbackMessage();
 
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();
@@ -57,6 +63,9 @@ export const render = (pieces, selectedTags = new Set()) => {
     i -= 1;
   });
 
+  if (selectedTags.size > 0 && !cardsContainer.hasChildNodes()) {
+    updateFeedbackMessage("No pieces match all the selected tags");
+  }
   // recache new cards
   const cards = document.querySelectorAll(".card");
   // bind events
