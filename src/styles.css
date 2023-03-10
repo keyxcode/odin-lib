@@ -285,7 +285,7 @@ textarea {
 
 #tag-container {
   width: 80%;
-  display: flex;
+  display: none;
   gap: 10px;
   justify-content: start;
   align-items: center;

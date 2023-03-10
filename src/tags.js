@@ -42,6 +42,7 @@ export const render = () => {
     tagDiv.addEventListener("click", (e) => {
       selectOrUnselectTag(e);
       EventManager.publish("tagsSelected", selectedTags);
+      console.log(selectedTags);
     })
   );
 };

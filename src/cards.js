@@ -23,11 +23,21 @@ const createCardHTML = (piece) => {
   return card;
 };
 
-const pieceHasSelectedTags = (cardTags, selectedTags) => {
-  const cardTagsLowerCase = cardTags.map((cardTag) => cardTag.toLowerCase());
-  console.log(cardTagsLowerCase);
+const createCardFromPiece = (piece, id) => {
+  const card = createCardHTML(piece);
+  card.classList.add("card");
+  card.dataset.id = id;
+  card.dataset.finished = piece.learnt;
+  return card;
+};
+
+const pieceHasSelectedTags = (piece, selectedTags) => {
+  const pieceTags = piece.tags.split(",").map((item) => item.trim());
+  const pieceTagsLowerCase = pieceTags.map((pieceTag) =>
+    pieceTag.toLowerCase()
+  );
   return Array.from(selectedTags).every((selectedTag) =>
-    cardTagsLowerCase.includes(selectedTag)
+    pieceTagsLowerCase.includes(selectedTag)
   );
 };
 
@@ -37,37 +47,28 @@ const updateFeedbackMessage = (message = "") => {
 };
 
 export const render = (pieces, selectedTags = new Set()) => {
-  // Empty message
   if (pieces.length === 0) {
     updateFeedbackMessage("Press the plus button to add a piece");
   } else updateFeedbackMessage();
 
   // without any arg, replaceChildren() removes all children
   cardsContainer.replaceChildren();
-
   // newest addition is shown first
   const reversedPieces = pieces.slice().reverse();
-  let i = reversedPieces.length - 1;
+  // therefore id has to go from highest to lowest
+  let id = reversedPieces.length - 1;
   reversedPieces.forEach((piece) => {
-    const pieceTags = piece.tags.split(",").map((item) => item.trim());
-    if (
-      pieceHasSelectedTags(pieceTags, selectedTags) ||
-      selectedTags.size === 0
-    ) {
-      const card = createCardHTML(piece);
-      card.classList.add("card");
-      card.dataset.id = i;
-      card.dataset.finished = piece.learnt;
+    if (pieceHasSelectedTags(piece, selectedTags) || selectedTags.size === 0) {
+      const card = createCardFromPiece(piece, id);
       cardsContainer.appendChild(card);
     }
-    i -= 1;
+    id -= 1;
   });
 
   if (selectedTags.size > 0 && !cardsContainer.hasChildNodes()) {
     updateFeedbackMessage("No pieces match all the selected tags");
   }
-  // recache new cards
+
   const cards = document.querySelectorAll(".card");
-  // bind events
   EventManager.publish("cardsChanged", cards);
 };
