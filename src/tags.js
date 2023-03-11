@@ -4,7 +4,9 @@ const tags = new Set();
 const selectedTags = new Set();
 
 // cache DOM
-const tagsContainer = document.querySelector("#tag-container");
+const tagsContainer = document.querySelector("#tags-container");
+const tagsHider = document.querySelector("#tags-hider");
+const tagsDropDown = document.querySelector("#dropdown");
 
 const selectOrUnselectTag = (e) => {
   const tagDiv = e.target;
@@ -20,12 +22,23 @@ const selectOrUnselectTag = (e) => {
   }
 };
 
+const showHideTagsArea = (displayStatus) => {
+  if (displayStatus === "show") {
+    tagsContainer.style.display = "flex";
+    tagsHider.style.display = "flex";
+  } else if (displayStatus === "hide") {
+    tagsContainer.style.display = "none";
+    tagsHider.style.display = "none";
+  }
+};
+
 export const render = () => {
   if (tags.size === 0) {
-    tagsContainer.style.display = "none";
+    showHideTagsArea("hide");
     return;
   }
-  tagsContainer.style.display = "flex";
+  showHideTagsArea("show");
+
   tagsContainer.replaceChildren();
   tags.forEach((tag) => {
     const tagDiv = document.createElement("div");
@@ -42,7 +55,6 @@ export const render = () => {
     tagDiv.addEventListener("click", (e) => {
       selectOrUnselectTag(e);
       EventManager.publish("tagsSelected", selectedTags);
-      console.log(selectedTags);
     })
   );
 };
@@ -66,4 +78,15 @@ const getTagsFromPieces = (pieces) => {
 EventManager.subscribe("piecesChanged", (pieces) => {
   getTagsFromPieces(pieces);
   render();
+});
+
+tagsDropDown.addEventListener("click", () => {
+  tagsDropDown.classList.toggle("active");
+  if (tagsContainer.classList.contains("hide-tags")) {
+    tagsContainer.classList.remove("hide-tags");
+    tagsContainer.classList.add("show-tags");
+  } else {
+    tagsContainer.classList.remove("show-tags");
+    tagsContainer.classList.add("hide-tags");
+  }
 });

@@ -100,20 +100,6 @@ export default () => {
     Cards.render(PiecesStorage.myPieces, selectedTags);
   });
 
-  const tagsDropDown = document.querySelector("#dropdown");
-  const tagsContainer = document.querySelector("#tag-container");
-
-  tagsDropDown.addEventListener("click", () => {
-    tagsDropDown.classList.toggle("active");
-    if (tagsContainer.classList.contains("hide-tags")) {
-      tagsContainer.classList.remove("hide-tags");
-      tagsContainer.classList.add("show-tags");
-    } else {
-      tagsContainer.classList.remove("show-tags");
-      tagsContainer.classList.add("hide-tags");
-    }
-  });
-
   // init
   PiecesStorage.getPiecesFromLocalStorage();
   EventManager.publish("piecesChanged", PiecesStorage.myPieces);
