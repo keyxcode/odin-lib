@@ -100,7 +100,7 @@ export default () => {
     Cards.render(PiecesStorage.myPieces, selectedTags);
   });
 
-  const tagsDropDown = document.querySelector("#tags-hider .dropdown");
+  const tagsDropDown = document.querySelector("#dropdown");
   const tagsContainer = document.querySelector("#tag-container");
 
   tagsDropDown.addEventListener("click", () => {

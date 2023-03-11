@@ -311,37 +311,18 @@ textarea {
   font-size: 80%;
 }
 
-.dropdown {
-  position: relative;
-  bottom: 3px;
+#dropdown {
+  transition-duration: 0.3s;
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: var(--lightest);
+  overflow: hidden;
 }
 
-.left-icon,
-.right-icon {
-  position: relative;
-  display: inline-block;
-  width: 10px;
-  height: 2px;
-  background-color: var(--lightest);
-  border-radius: 10px;
-  transition: 0.2s;
-}
-
-.left-icon {
-  transform: rotate(45deg);
-  left: 8px;
-}
-
-.right-icon {
-  transform: rotate(-45deg);
-}
-
-.dropdown.active .left-icon {
-  transform: rotate(135deg);
-}
-
-.dropdown.active .right-icon {
-  transform: rotate(-135deg);
+#dropdown.active {
+  transform: rotate(-90deg);
 }
 
 .hide-tags {
