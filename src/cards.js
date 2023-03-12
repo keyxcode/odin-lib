@@ -72,3 +72,7 @@ export const render = (pieces, selectedTags = new Set()) => {
   const cards = document.querySelectorAll(".card");
   EventManager.publish("cardsChanged", cards);
 };
+
+EventManager.subscribe("piecesChanged", (pieces) => {
+  render(pieces);
+});

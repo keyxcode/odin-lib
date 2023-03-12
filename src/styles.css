@@ -283,13 +283,17 @@ textarea {
   display: flex;
 }
 
-#tags-container {
-  display: none;
-  gap: 10px;
+#tags-area {
+  display: grid;
   width: 80%;
+}
+
+#tags-container {
+  display: flex;
+  gap: 10px;
   justify-content: start;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 0;
   flex-wrap: wrap;
   background-color: var(--lightest);
   border-radius: var(--global-radius);
@@ -305,19 +309,17 @@ textarea {
 
 #tags-hider {
   color: var(--lightest);
-  text-align: left;
-  width: 80%;
   font-size: 80%;
   display: flex;
   align-items: center;
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid var(--lightest);
+  cursor: pointer;
 }
 
 #dropdown {
   transition-duration: 0.3s;
-  cursor: pointer;
   width: 1em;
   height: 1em;
   vertical-align: middle;
@@ -382,8 +384,7 @@ textarea {
     grid-template-columns: repeat(2, 1fr);
     width: max(250px, 30%);
   }
-  #tags-container,
-  #tags-hider {
+  #tags-area {
     width: 50%;
   }
   #add-mobile {

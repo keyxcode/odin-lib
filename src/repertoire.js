@@ -85,11 +85,7 @@ export default () => {
     });
   });
   clearAll.addEventListener("click", PiecesStorage.clearAll);
-  EventManager.subscribe("piecesChanged", (pieces) => {
-    Cards.render(pieces);
-    Tags.render(pieces);
-    console.log("repertoire receives piecesChanged: render cards, render tags");
-  });
+
   EventManager.subscribe("pieceEdited", (id) => {
     SelectedCard.showSelectedCard(id);
     console.log(

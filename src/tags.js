@@ -2,11 +2,15 @@ import * as EventManager from "./event-manager.js";
 
 const tags = new Set();
 const selectedTags = new Set();
+if (!localStorage.getItem("tagsDisplayStatus")) {
+  localStorage.setItem("tagsDisplayStatus", "show");
+}
 
 // cache DOM
-const tagsContainer = document.querySelector("#tags-container");
+const tagsArea = document.querySelector("#tags-area");
 const tagsHider = document.querySelector("#tags-hider");
 const tagsDropDown = document.querySelector("#dropdown");
+const tagsContainer = document.querySelector("#tags-container");
 
 const selectOrUnselectTag = (e) => {
   const tagDiv = e.target;
@@ -24,20 +28,34 @@ const selectOrUnselectTag = (e) => {
 
 const showHideTagsArea = (displayStatus) => {
   if (displayStatus === "show") {
+    tagsArea.style.display = "grid";
+  } else if (displayStatus === "hide") {
+    tagsArea.style.display = "none";
+  }
+};
+
+const showHideTagsContainer = (displayStatus) => {
+  if (displayStatus === "show") {
     tagsContainer.style.display = "flex";
-    tagsHider.style.display = "flex";
+    tagsContainer.classList.remove("hide-tags");
+    tagsContainer.classList.add("show-tags");
+    tagsDropDown.classList.remove("active");
   } else if (displayStatus === "hide") {
     tagsContainer.style.display = "none";
-    tagsHider.style.display = "none";
+    tagsContainer.classList.remove("show-tags");
+    tagsContainer.classList.add("hide-tags");
+    tagsDropDown.classList.add("active");
   }
 };
 
 export const render = () => {
+  const tagsContainerDisplayStatus = localStorage.getItem("tagsDisplayStatus");
   if (tags.size === 0) {
     showHideTagsArea("hide");
     return;
   }
   showHideTagsArea("show");
+  showHideTagsContainer(tagsContainerDisplayStatus);
 
   tagsContainer.replaceChildren();
   tags.forEach((tag) => {
@@ -80,13 +98,10 @@ EventManager.subscribe("piecesChanged", (pieces) => {
   render();
 });
 
-tagsDropDown.addEventListener("click", () => {
-  tagsDropDown.classList.toggle("active");
-  if (tagsContainer.classList.contains("hide-tags")) {
-    tagsContainer.classList.remove("hide-tags");
-    tagsContainer.classList.add("show-tags");
-  } else {
-    tagsContainer.classList.remove("show-tags");
-    tagsContainer.classList.add("hide-tags");
-  }
+tagsHider.addEventListener("click", () => {
+  const currentDisplayStatus = localStorage.getItem("tagsDisplayStatus");
+  const switchedDisplayStatus =
+    currentDisplayStatus === "show" ? "hide" : "show";
+  localStorage.setItem("tagsDisplayStatus", switchedDisplayStatus);
+  showHideTagsContainer(switchedDisplayStatus);
 });
