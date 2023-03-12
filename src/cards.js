@@ -66,7 +66,7 @@ export const render = (pieces, selectedTags = new Set()) => {
   });
 
   if (selectedTags.size > 0 && !cardsContainer.hasChildNodes()) {
-    updateFeedbackMessage("No pieces match all the selected tags");
+    updateFeedbackMessage("None of the pieces match with the selected tags");
   }
 
   const cards = document.querySelectorAll(".card");
