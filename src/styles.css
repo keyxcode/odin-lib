@@ -162,6 +162,7 @@ footer {
 
 #feedback-message {
   display: none;
+  width: 80%;
 }
 
 .card {
@@ -380,7 +381,8 @@ textarea {
   #add-desktop {
     display: block;
   }
-  #stats {
+  #stats,
+  #feedback-message {
     grid-template-columns: repeat(2, 1fr);
     width: max(250px, 30%);
   }
